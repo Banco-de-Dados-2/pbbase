@@ -51,6 +51,9 @@ end event
 event ue_incluir;call super::ue_incluir;msg('cad')
 end event
 
+event activate;call super::activate;ParentWindow().Dynamic of_set_window( this )
+end event
+
 type tab_funcionario from tab within w_cad_usuario
 integer x = 59
 integer y = 36

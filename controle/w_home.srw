@@ -15,13 +15,18 @@ end type
 global w_home w_home
 
 type variables
-
+w_ancestor iw_ativa
 end variables
+
 forward prototypes
-public subroutine of_set_window (window aw_window)
+public function w_ancestor of_getwindowativa ()
+public subroutine of_set_window (w_ancestor aw_window)
 end prototypes
 
-public subroutine of_set_window (window aw_window);iw_ativa = aw_window
+public function w_ancestor of_getwindowativa ();Return this.iw_ativa
+end function
+
+public subroutine of_set_window (w_ancestor aw_window);iw_ativa = aw_window
 end subroutine
 
 on w_home.create

@@ -25,6 +25,7 @@ global w_login w_login
 type variables
 nv_login inv_login
 end variables
+
 forward prototypes
 public subroutine of_logar ()
 end prototypes

@@ -16,6 +16,7 @@ String gs_sistema = 'Banco'
 
 
 end variables
+
 global type vendabase from application
 string appname = "vendabase"
 end type

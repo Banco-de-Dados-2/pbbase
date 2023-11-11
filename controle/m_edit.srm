@@ -168,7 +168,13 @@ on m_incluir.destroy
 call super::destroy
 end on
 
-event clicked;ParentWindow.Dynamic event ue_incluir() 
+event clicked;w_ancestor lw_ativa, lw_pai
+
+lw_pai = ParentWindow
+
+lw_ativa = lw_pai.Dynamic of_getwindowativa()
+
+lw_ativa.triggerEvent('ue_incluir')
 end event
 
 type m_excluir from menu within m_editar

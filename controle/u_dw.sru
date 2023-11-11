@@ -16,6 +16,7 @@ global u_dw u_dw
 type variables
 w_ancestor iw_pai
 end variables
+
 forward prototypes
 public subroutine of_set_color_background ()
 end prototypes
