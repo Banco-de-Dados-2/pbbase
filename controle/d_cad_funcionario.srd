@@ -1,0 +1,46 @@
+HA$PBExportHeader$d_cad_funcionario.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=808 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=fun_codigo dbname="tb_funcionarios.fun_codigo" )
+ column=(type=char(45) update=yes updatewhereclause=yes name=fun_nome dbname="tb_funcionarios.fun_nome" )
+ column=(type=char(45) update=yes updatewhereclause=yes name=fun_cpf dbname="tb_funcionarios.fun_cpf" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=fun_funcao dbname="tb_funcionarios.fun_funcao" values="Vendedor	Vendedor/Gerente	Gerente/Diretor	Diretor/Estoquista	Estoquista/" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=fun_senha dbname="tb_funcionarios.fun_senha" )
+ column=(type=char(50) updatewhereclause=yes name=senhae dbname="tb_funcionarios.senhae" )
+ retrieve="  SELECT dba.tb_funcionarios.fun_codigo,   
+         dba.tb_funcionarios.fun_nome,   
+         dba.tb_funcionarios.fun_cpf,   
+         dba.tb_funcionarios.fun_funcao,   
+         dba.tb_funcionarios.fun_senha,
+         dba.tb_funcionarios.fun_senha as senhae  
+    FROM dba.tb_funcionarios
+	WHERE dba.tb_funcionarios.fun_codigo = :RA_CODIGO
+" update="dba.tb_funcionarios" updatewhere=0 updatekeyinplace=yes arguments=(("RA_CODIGO", number)) )
+groupbox(band=detail text="Dados Funcionario"border="2" color="33554432" x="18" y="12" height="780" width="3255"  name=gb_funcionario visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="C$$HEX1$$f300$$ENDHEX$$digo" border="0" color="33554432" x="101" y="100" height="64" width="466" html.valueishtml="0"  name=fun_codigo_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="0" color="33554432" x="613" y="96" height="76" width="329" format="[general]" html.valueishtml="0"  name=fun_codigo visible="1" editmask.mask="######" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Nome" border="0" color="33554432" x="302" y="240" height="64" width="265" html.valueishtml="0"  name=fun_nome_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="CPF" border="0" color="33554432" x="101" y="380" height="64" width="466" html.valueishtml="0"  name=fun_cpf_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=30 border="5" color="33554432" x="613" y="376" height="76" width="741" format="[general]" html.valueishtml="0"  name=fun_cpf visible="1" editmask.mask="xxx.xxx.xxx-xx" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Senha" border="0" color="33554432" x="101" y="520" height="64" width="466" html.valueishtml="0"  name=fun_senha_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Confirmar Senha" border="0" color="33554432" x="64" y="636" height="64" width="503" html.valueishtml="0"  name=t_1 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Fun$$HEX2$$e700e300$$ENDHEX$$o" border="0" color="33554432" x="1861" y="380" height="64" width="466" html.valueishtml="0"  name=fun_funcao_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="5" color="33554432" x="2377" y="376" height="76" width="741" format="[general]" html.valueishtml="0"  name=fun_funcao visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.useasborder=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=20 border="5" color="33554432" x="613" y="236" height="76" width="2505" format="[general]" html.valueishtml="0"  name=fun_nome visible="1" edit.limit=45 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=50 border="5" color="33554432" x="613" y="516" height="76" width="2505" format="*********" html.valueishtml="0"  name=fun_senha visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.password=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=60 border="5" color="33554432" x="613" y="632" height="76" width="2505" format="*********" html.valueishtml="0"  name=senhae visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.password=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -3,5 +3,7 @@ Save Format v3.0(19990112)
  "objects.pbl" "";
 @end;
 @begin Objects
- "uo_cad_usuario.sru" "objects.pbl";
+ "nv_login.sru" "objects.pbl";
+ "nv_object.sru" "objects.pbl";
+ "nv_datastore.sru" "objects.pbl";
 @end;

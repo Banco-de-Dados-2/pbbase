@@ -1,0 +1,8 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "dataobjets.pbl" "";
+@end;
+@begin Objects
+ "d_cad_funcionario.srd" "dataobjets.pbl";
+ "d_pesquisa_funcionario.srd" "dataobjets.pbl";
+@end;

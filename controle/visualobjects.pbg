@@ -1,0 +1,9 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "visualobjects.pbl" "";
+@end;
+@begin Objects
+ "uo_cad_funcionario.sru" "visualobjects.pbl";
+ "uo_pesquisa_funcionario.sru" "visualobjects.pbl";
+ "uo_home.sru" "visualobjects.pbl";
+@end;

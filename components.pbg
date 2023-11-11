@@ -3,8 +3,18 @@ Save Format v3.0(19990112)
  "components.pbl" "";
 @end;
 @begin Objects
- "w_ancestor.srw" "components.pbl";
+ "u_tab.sru" "components.pbl";
  "u_sle.sru" "components.pbl";
+ "w_ancestor.srw" "components.pbl";
+ "m_edit.srm" "components.pbl";
+ "uo_pesquisa_generica.sru" "components.pbl";
+ "u_dw.sru" "components.pbl";
  "u_em.sru" "components.pbl";
+ "u_gb.sru" "components.pbl";
+ "u_pb.sru" "components.pbl";
  "u_st.sru" "components.pbl";
+ "u_uo.sru" "components.pbl";
+ "u_cb.sru" "components.pbl";
+ "u_lb.sru" "components.pbl";
+ "nv_object.sru" "components.pbl";
 @end;

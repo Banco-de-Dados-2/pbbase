@@ -4,5 +4,6 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "w_login.srw" "vendabase.pbl";
+ "msg.srf" "vendabase.pbl";
  "vendabase.sra" "vendabase.pbl";
 @end;

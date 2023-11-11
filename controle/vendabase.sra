@@ -12,6 +12,7 @@ end forward
 
 global variables
 Boolean gb_desenv
+String gs_sistema = 'Banco'
 end variables
 global type vendabase from application
 string appname = "vendabase"
@@ -35,6 +36,13 @@ destroy(error)
 destroy(message)
 end on
 
-event open;Open(w_login)
+event open;// Profile login
+SQLCA.DBMS = "ODBC"
+SQLCA.AutoCommit = False
+SQLCA.DBParm = "ConnectString='DSN=PostgreSQL35W;UID=logi;PWD=jw8s0F4'"
+
+CONNECT USING SQLCA;
+
+Open(w_login)
 end event
 
