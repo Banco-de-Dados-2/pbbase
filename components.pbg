@@ -4,6 +4,7 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "w_ancestor.srw" "components.pbl";
+ "u_sle.sru" "components.pbl";
  "u_em.sru" "components.pbl";
  "u_st.sru" "components.pbl";
 @end;
