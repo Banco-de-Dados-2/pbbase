@@ -19,13 +19,11 @@ end type
 end forward
 
 global type w_cad_usuario from w_ancestor
-integer width = 3803
-integer height = 2592
+integer width = 3831
+integer height = 2616
 string title = ""
 string menuname = ""
-boolean maxbox = false
-boolean resizable = false
-windowtype windowtype = popup!
+windowtype windowtype = main!
 string icon = ""
 boolean clientedge = true
 tab_funcionario tab_funcionario
@@ -45,6 +43,14 @@ call super::destroy
 destroy(this.tab_funcionario)
 end on
 
+event post_open;call super::post_open;m_edit.Hide()
+
+Return 1
+end event
+
+event ue_incluir;call super::ue_incluir;msg('cad')
+end event
+
 type tab_funcionario from tab within w_cad_usuario
 integer x = 59
 integer y = 36
@@ -59,7 +65,7 @@ fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 long backcolor = 67108864
 boolean showpicture = false
-integer selectedtab = 1
+integer selectedtab = 2
 tabpage_pesquisa tabpage_pesquisa
 tabpage_cadastro tabpage_cadastro
 end type

@@ -26,6 +26,8 @@ If Len(ERRORS) > 0 Then
 	Return -1
 End If
 
+this.SetTransObject( SQLCA )
+
 If ab_retrieve Then this.retrieve()
 	
 Return 0

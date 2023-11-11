@@ -143,6 +143,9 @@ on m_incluir.create
 call super::create
 this.text = "&Incluir~tCtrl+Ins"
 this.shortcut = 301
+this.toolbaritemname = "imagens\incluir.jpg"
+this.toolbaritemdownname = "imagens\dincluir.jpg"
+this.toolbaritemorder = 1
 this.menustyle = contemporarymenu!
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
@@ -165,6 +168,9 @@ on m_incluir.destroy
 call super::destroy
 end on
 
+event clicked;ParentWindow.Dynamic event ue_incluir() 
+end event
+
 type m_excluir from menu within m_editar
 end type
 
@@ -172,6 +178,9 @@ on m_excluir.create
 call super::create
 this.text = "&Excluir~tCtrl+Del"
 this.shortcut = 302
+this.toolbaritemname = "imagens\excluir.jpg"
+this.toolbaritemdownname = "imagens\dexcluir.jpg"
+this.toolbaritemorder = 2
 this.menustyle = contemporarymenu!
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
@@ -182,6 +191,7 @@ this.facename = "Tahoma"
 this.titlebackcolor = 134217730
 this.bitmapbackcolor = 12632256
 this.menubitmaps = true
+this.menuanimation = true
 this.titlegradient = true
 this.toolbartextcolor = 134217746
 this.toolbarbackcolor = 67108864
@@ -201,6 +211,9 @@ on m_gravar.create
 call super::create
 this.text = "&Gravar~tCtrl+S"
 this.shortcut = 339
+this.toolbaritemname = "imagens\salvar.jpg"
+this.toolbaritemdownname = "imagens\dsalvar.jpg"
+this.toolbaritemorder = 3
 this.menustyle = contemporarymenu!
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
@@ -230,6 +243,9 @@ on m_limpar.create
 call super::create
 this.text = "&Limpar~tCtrl+L"
 this.shortcut = 332
+this.toolbaritemname = "imagens\limpar.jpg"
+this.toolbaritemdownname = "imagens\dlimpar.jpg"
+this.toolbaritemorder = 4
 this.menustyle = contemporarymenu!
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732

@@ -14,10 +14,9 @@ end type
 global uo_home uo_home
 
 type variables
-w_ancestor iw_pai
-w_cad_usuario iw_cad_usuario
+window iw_pai, iw_cad_usuario
+//w_cad_usuario iw_cad_usuario
 end variables
-
 forward prototypes
 public subroutine of_set_iw_pai (w_ancestor aw_pai)
 public subroutine of_abrir_funcionario ()
@@ -26,7 +25,9 @@ end prototypes
 public subroutine of_set_iw_pai (w_ancestor aw_pai);iw_pai = aw_pai
 end subroutine
 
-public subroutine of_abrir_funcionario ();Open( iw_cad_usuario, iw_pai)
+public subroutine of_abrir_funcionario ();OpenSheet( iw_cad_usuario, 'w_cad_usuario', iw_pai, 0 , Original!)
+
+
 end subroutine
 
 event constructor;call super::constructor;//
