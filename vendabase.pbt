@@ -3,5 +3,5 @@ Save Format v3.0(19990112)
 @end;
 appname "vendabase";
 applib "vendabase.pbl";
-LibList "vendabase.pbl;components.pbl;pages.pbl;utils.pbl";
+LibList "vendabase.pbl;components.pbl;pages.pbl;utils.pbl;objects.pbl";
 type "pb";
