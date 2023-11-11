@@ -15,12 +15,26 @@ global uo_cad_funcionario uo_cad_funcionario
 
 forward prototypes
 public subroutine of_inicializar ()
+public subroutine of_incluir ()
 end prototypes
 
-public subroutine of_inicializar ();dw_cad_funcionario.of_set_color_background( )
+public subroutine of_inicializar ();w_ancestor lw_pai
+
+lw_pai = GetParent().GetParent()
+
+dw_cad_funcionario.of_set_w_pai( lw_pai )
+dw_cad_funcionario.of_set_color_background( )
 
 dw_cad_funcionario.SetTransObject(SQLCA)
 dw_cad_funcionario.InsertRow(0)
+dw_cad_funcionario.of_bloq_campo( {"senhae", "fun_nome", "fun_funcao", "fun_senha", "fun_cpf"}, true )
+
+end subroutine
+
+public subroutine of_incluir ();dw_cad_funcionario.Reset()
+dw_cad_funcionario.InsertRow(0)
+dw_cad_funcionario.of_bloq_campo( {"fun_codigo"}, true)
+dw_cad_funcionario.of_bloq_campo( {"senhae", "fun_nome", "fun_funcao", "fun_senha", "fun_cpf"}, false)
 end subroutine
 
 event constructor;call super::constructor;//

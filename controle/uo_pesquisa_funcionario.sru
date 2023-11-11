@@ -26,7 +26,11 @@ forward prototypes
 public subroutine of_inicializar ()
 end prototypes
 
-public subroutine of_inicializar ();dw_filtro.of_set_color_background( )
+public subroutine of_inicializar ();w_ancestor lw_pai
+lw_pai = GetParent().GetParent() 
+
+dw_filtro.of_set_w_pai( lw_pai )
+dw_filtro.of_set_color_background( )
 dw_filtro.InsertRow(0)
 end subroutine
 

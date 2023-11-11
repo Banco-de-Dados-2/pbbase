@@ -19,10 +19,37 @@ end variables
 
 forward prototypes
 public subroutine of_set_color_background ()
+public subroutine of_bloq_campo (string as_campos[], boolean ab_bloq)
+public subroutine of_set_w_pai (w_ancestor aw_window)
 end prototypes
 
 public subroutine of_set_color_background ();//
 this.Modify("DataWindow.Color='"+ String(iw_pai.BackColor) +"'")
+end subroutine
+
+public subroutine of_bloq_campo (string as_campos[], boolean ab_bloq);Long ll_tam, ll_for
+String ls_Protect, ls_BackMode
+ll_tam = UpperBound(as_campos)
+
+If ab_bloq Then
+	ls_Protect = '1'
+	ls_BackMode = '1'
+Else
+	ls_Protect = '0'
+	ls_BackMode = '0'	
+End If
+
+For ll_for = 1 To ll_tam
+	try 
+		this.Modify(as_campos[ll_for]+".Protect='"+ ls_Protect + "'")
+		this.Modify(as_campos[ll_for]+".Background.Mode='" + ls_BackMode + "'")
+	catch ( Exception e )
+		msg(e.Text)
+	end try
+Next
+end subroutine
+
+public subroutine of_set_w_pai (w_ancestor aw_window);iw_pai = aw_window
 end subroutine
 
 on u_dw.create
@@ -30,7 +57,4 @@ end on
 
 on u_dw.destroy
 end on
-
-event constructor;iw_pai = this.GetParent()
-end event
 

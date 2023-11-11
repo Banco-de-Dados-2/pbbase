@@ -17,12 +17,28 @@ global u_uo u_uo
 
 forward prototypes
 public subroutine of_inicializar ()
+public subroutine of_incluir ()
+public subroutine of_excluir ()
+public subroutine of_gravar ()
+public subroutine of_limpar ()
 end prototypes
 
 event post_constructor();of_inicializar()
 end event
 
 public subroutine of_inicializar ();
+end subroutine
+
+public subroutine of_incluir ();//
+end subroutine
+
+public subroutine of_excluir ();//
+end subroutine
+
+public subroutine of_gravar ();//
+end subroutine
+
+public subroutine of_limpar ();//
 end subroutine
 
 event constructor;//
