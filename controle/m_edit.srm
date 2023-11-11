@@ -168,7 +168,13 @@ on m_incluir.destroy
 call super::destroy
 end on
 
-event clicked;ParentWindow.Dynamic event ue_incluir() 
+event clicked;w_ancestor lw_ativa, lw_pai
+
+lw_pai = ParentWindow
+
+lw_ativa = lw_pai.Dynamic of_getwindowativa()
+
+lw_ativa.triggerEvent('ue_incluir')
 end event
 
 type m_excluir from menu within m_editar
@@ -204,6 +210,15 @@ on m_excluir.destroy
 call super::destroy
 end on
 
+event clicked;w_ancestor lw_ativa, lw_pai
+
+lw_pai = ParentWindow
+
+lw_ativa = lw_pai.Dynamic of_getwindowativa()
+
+lw_ativa.triggerEvent('ue_excluir')
+end event
+
 type m_gravar from menu within m_editar
 end type
 
@@ -236,6 +251,15 @@ on m_gravar.destroy
 call super::destroy
 end on
 
+event clicked;w_ancestor lw_ativa, lw_pai
+
+lw_pai = ParentWindow
+
+lw_ativa = lw_pai.Dynamic of_getwindowativa()
+
+lw_ativa.triggerEvent('ue_gravar')
+end event
+
 type m_limpar from menu within m_editar
 end type
 
@@ -267,4 +291,13 @@ end on
 on m_limpar.destroy
 call super::destroy
 end on
+
+event clicked;w_ancestor lw_ativa, lw_pai
+
+lw_pai = ParentWindow
+
+lw_ativa = lw_pai.Dynamic of_getwindowativa()
+
+lw_ativa.triggerEvent('ue_limpar')
+end event
 

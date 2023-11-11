@@ -14,7 +14,7 @@ end type
 global uo_home uo_home
 
 type variables
-window iw_pai, iw_cad_usuario
+w_ancestor iw_pai, iw_cad_usuario
 //w_cad_usuario iw_cad_usuario
 end variables
 forward prototypes

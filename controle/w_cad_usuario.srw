@@ -48,7 +48,12 @@ event post_open;call super::post_open;m_edit.Hide()
 Return 1
 end event
 
-event ue_incluir;call super::ue_incluir;msg('cad')
+event ue_incluir;call super::ue_incluir;If tab_funcionario.Selectedtab = 2 Then
+	tab_funcionario.tabpage_cadastro.of_incluir( )
+End If
+end event
+
+event activate;call super::activate;ParentWindow().Dynamic of_set_window( this )
 end event
 
 type tab_funcionario from tab within w_cad_usuario

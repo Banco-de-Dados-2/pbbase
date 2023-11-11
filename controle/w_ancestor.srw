@@ -30,7 +30,7 @@ end type
 global w_ancestor w_ancestor
 
 type variables
-window iw_ativa
+
 end variables
 event type long post_open();//
 
