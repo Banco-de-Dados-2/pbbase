@@ -4,5 +4,6 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "nv_login.sru" "objects.pbl";
+ "nv_ancobject.sru" "objects.pbl";
  "nv_datastore.sru" "objects.pbl";
 @end;
