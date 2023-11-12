@@ -6,4 +6,5 @@ Save Format v3.0(19990112)
  "d_cad_funcionario.srd" "dataobjets.pbl";
  "d_pesquisa_funcionario.srd" "dataobjets.pbl";
  "d_filtro_funcionario.srd" "dataobjets.pbl";
+ "d_contador.srd" "dataobjets.pbl";
 @end;

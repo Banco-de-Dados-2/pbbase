@@ -35,10 +35,14 @@ ls_login = Trim(uf_null( This.sle_usuario.text, '' ) )
 ls_senha = Trim(uf_null( This.sle_senha.text, '' ) ) 
 
 If ls_login = 'dev' And gb_desenv = True Then 
-	inv_login.of_logarDev()
-	Open(w_home)
-	Close(this)
-	Return
+	If inv_login.of_logarDev() Then
+		Open(w_home)
+		Close(this)
+		Return
+	Else
+		HALT
+		Return
+	End If
 End If
 
 inv_login.of_set_login( This.sle_usuario.text, This.sle_senha.text )
