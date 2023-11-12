@@ -32,6 +32,7 @@ public subroutine of_excluir ()
 public subroutine of_editar (long al_codigo)
 public function long of_delete_userdb (string al_user)
 public function integer of_alter_userdb (string old_user, string new_user, string as_pw)
+public function integer of_altergroup_userdb (string as_user, string new_group, string old_group)
 end prototypes
 
 public subroutine of_inicializar ();w_ancestor lw_pai
@@ -83,7 +84,7 @@ End If
 dw_cad_funcionario.SetRedraw( True )
 end subroutine
 
-public function boolean of_validar ();String ls_cpf, ls_senha, ls_senhae, ls_nome, ls_funcao
+public function boolean of_validar ();String ls_cpf, ls_senha, ls_senhae, ls_nome, ls_funcao, ls_nova_senha
 nv_datastore lds_funcionario
 
 ls_cpf = Trim(uf_null(dw_cad_funcionario.GetItemString(1,'fun_cpf'), ''))
@@ -135,6 +136,12 @@ If lb_inserindo and Not lb_Alterando Then
 		RollBack Using SQLCA;
 		Return False
 	End If
+	If of_altergroup_userDB( (Lower(Left(ls_funcao,1)) + ls_cpf) , lower(ls_funcao), '' ) <> 1 Then
+		Msg('Erro ao criar Usuario')
+		RollBack Using SQLCA;
+		Return False
+	End If
+	
 ElseIf Not lb_inserindo and lb_Alterando Then
 	String old_funcao, old_cpf, old_senha
 	old_funcao = Trim(uf_null(dw_cad_funcionario.GetItemString(1,'fun_funcao', Primary!, true), ''))
@@ -155,10 +162,22 @@ ElseIf Not lb_inserindo and lb_Alterando Then
 			End If
 			Destroy(lds_funcionario)
 		End If
-		If of_alter_userDB((Lower(Left(old_funcao,1)) + old_cpf), (Lower(Left(ls_funcao,1)) + ls_cpf) , ls_senha ) <> 1 Then
+		If old_senha <> ls_senha Then 
+			ls_nova_senha = ls_senha
+		Else
+			ls_nova_senha = ''
+		End If
+		If of_alter_userDB((Lower(Left(old_funcao,1)) + old_cpf), (Lower(Left(ls_funcao,1)) + ls_cpf) , ls_nova_senha ) <> 1 Then
 			Msg('Erro ao Alterar Usuario')
 			RollBack Using SQLCA;
 			Return False
+		End If
+		If old_funcao <> ls_funcao Then
+			If of_altergroup_userDB( (Lower(Left(ls_funcao,1)) + ls_cpf) , lower(ls_funcao), lower(old_funcao) ) <> 1 Then
+				Msg('Erro ao criar Usuario')
+				RollBack Using SQLCA;
+				Return False
+			End If
 		End If
 	End If
 End If
@@ -272,6 +291,27 @@ String ls_sql
 nv_DataStore lds
 
 ls_sql = "SELECT DBA.ALTER_USERDB('" + old_user + "', '" + new_user + "', '" + as_pw + "') AS RET from public.DUMMY" ;
+
+lds = Create nv_datastore
+
+lds.of_create_from_sql( ls_sql, TRUE )
+
+If lds.RowCount() > 0 Then
+	ll_retorno = uf_null(lds.GetItemNumber(1,'RET'), 0)
+Else
+	ll_retorno = 0
+End If
+
+Destroy(lds)
+
+return ll_retorno
+end function
+
+public function integer of_altergroup_userdb (string as_user, string new_group, string old_group);long ll_retorno
+String ls_sql
+nv_DataStore lds
+
+ls_sql = "SELECT DBA.ALTERGROUP_USERDB('" + as_user + "', '" + new_group + "', '" + old_group + "') AS RET from public.DUMMY" ;
 
 lds = Create nv_datastore
 
