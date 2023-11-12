@@ -3,5 +3,6 @@ Save Format v3.0(19990112)
  "utils.pbl" "";
 @end;
 @begin Objects
+ "msg.srf" "utils.pbl";
  "uf_null.srf" "utils.pbl";
 @end;

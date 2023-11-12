@@ -5,4 +5,5 @@ Save Format v3.0(19990112)
 @begin Objects
  "w_home.srw" "pages.pbl";
  "w_cad_usuario.srw" "pages.pbl";
+ "w_frame.srw" "pages.pbl";
 @end;
