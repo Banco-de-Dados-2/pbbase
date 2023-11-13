@@ -36,6 +36,7 @@ end variables
 
 forward prototypes
 public subroutine of_set_estado (string as_estado)
+public function string of_get_estado ()
 end prototypes
 
 event type long post_open();//
@@ -54,6 +55,9 @@ end event
 
 public subroutine of_set_estado (string as_estado);
 end subroutine
+
+public function string of_get_estado ();return is_estado
+end function
 
 on w_ancestor.create
 if this.MenuName = "m_edit" then this.MenuID = create m_edit

@@ -15,11 +15,9 @@ global uo_cad_funcionario uo_cad_funcionario
 
 type variables
 nv_dados inv_dados
-m_edit im_edit
 w_cad_usuario iw_pai
 Boolean lb_alterando = False, lb_inserindo = False
 end variables
-
 forward prototypes
 public subroutine of_inicializar ()
 public subroutine of_incluir ()
@@ -72,7 +70,10 @@ public subroutine of_gravar ();dw_cad_funcionario.SetRedraw( False )
 
 dw_cad_funcionario.accepttext( )
 
-If Not of_Validar() Then Return
+If Not of_Validar() Then 
+	dw_cad_funcionario.SetRedraw( True )
+	Return
+End If 
 
 If inv_dados.Update( { dw_cad_funcionario} ) = 1 Then
 	Msg("Gravado com Sucesso")

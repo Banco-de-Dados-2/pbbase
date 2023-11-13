@@ -21,7 +21,7 @@ end forward
 global type w_cad_usuario from w_ancestor
 integer width = 3831
 integer height = 2616
-string title = ""
+string title = "Funcionarios"
 string menuname = ""
 windowtype windowtype = main!
 string icon = ""
@@ -36,15 +36,11 @@ end variables
 
 forward prototypes
 public subroutine of_set_estado (string as_estado)
-public function string of_get_estado ()
 end prototypes
 
 public subroutine of_set_estado (string as_estado);is_estado = as_estado
 tab_funcionario.tabpage_cadastro.of_set_estado( is_estado )
 end subroutine
-
-public function string of_get_estado ();return is_estado
-end function
 
 on w_cad_usuario.create
 int iCurrent

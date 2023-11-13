@@ -4,8 +4,10 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "nv_login.sru" "objects.pbl";
+ "nv_produto.sru" "objects.pbl";
  "nv_dados.sru" "objects.pbl";
  "nv_transaction.sru" "objects.pbl";
  "nv_ancobject.sru" "objects.pbl";
+ "nv_pesquisa.sru" "objects.pbl";
  "nv_datastore.sru" "objects.pbl";
 @end;
