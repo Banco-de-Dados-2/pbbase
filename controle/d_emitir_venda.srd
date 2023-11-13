@@ -1,0 +1,47 @@
+HA$PBExportHeader$d_emitir_venda.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=260 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=ven_codigo dbname="tb_vendas.ven_codigo" )
+ column=(type=datetime update=yes updatewhereclause=yes name=ven_horario dbname="tb_vendas.ven_horario" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=ven_valor_total dbname="tb_vendas.ven_valor_total" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tb_funcionarios_fun_codigo dbname="tb_vendas.tb_funcionarios_fun_codigo" )
+ column=(type=char(45) updatewhereclause=yes name=tb_funcionarios_fun_nome dbname="tb_funcionarios.fun_nome" )
+ retrieve="SELECT
+    venda.ven_codigo as ven_codigo,
+    venda.ven_horario as ven_horario,
+    venda.ven_valor_total as ven_valor_total,
+    venda.tb_funcionarios_fun_codigo as tb_funcionarios_fun_codigo,
+    tf.fun_nome
+FROM
+    dba.tb_vendas as venda
+    join dba.tb_funcionarios tf on 
+        tf.fun_codigo = venda.tb_funcionarios_fun_codigo
+where
+    (:ra_codigo = 0 or venda.ven_codigo = :ra_codigo)
+" update="dba.tb_vendas" updatewhere=0 updatekeyinplace=no arguments=(("ra_codigo", number)) )
+column(band=detail id=3 alignment="1" tabsequence=30 border="5" color="33554432" x="2597" y="136" height="76" width="329" format="[general]" html.valueishtml="0"  name=ven_valor_total visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="5" color="33554432" x="2953" y="20" height="64" width="1216" format="[general]" html.valueishtml="0" protect="0~t1"  name=tb_funcionarios_fun_nome visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="5" color="33554432" x="192" y="20" height="64" width="329" format="[general]" html.valueishtml="0"  name=ven_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="33554432" x="1362" y="20" height="64" width="603" format="[shortdate] [time]" html.valueishtml="0"  name=ven_horario visible="1" editmask.mask="dd/mm/yy hh:mm" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=4 alignment="1" tabsequence=20 border="5" color="33554432" x="2597" y="20" height="64" width="329" format="[general]" html.valueishtml="0"  name=tb_funcionarios_fun_codigo visible="1" editmask.mask="######" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="N$$HEX1$$ba00$$ENDHEX$$:" border="0" color="33554432" x="32" y="20" height="64" width="114" html.valueishtml="0"  name=ite_codigo_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Data Movimento:" border="0" color="33554432" x="773" y="20" height="64" width="507" html.valueishtml="0"  name=t_1 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Valor Total:" border="0" color="33554432" x="2053" y="144" height="64" width="507" html.valueishtml="0"  name=t_3 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Funcionario:" border="0" color="33554432" x="2053" y="20" height="64" width="507" html.valueishtml="0"  name=t_2 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+button(band=detail text="" filename="imagens\incluir.jpg" enabled=no action="0" border="0" color="33554432" x="69" y="132" height="104" width="123" vtextalign="0" htextalign="0"  name=b_incluir visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="" filename="imagens\excluir.jpg" enabled=no action="0" border="0" color="33554432" x="229" y="132" height="104" width="123" vtextalign="0" htextalign="0"  name=b_excluir visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

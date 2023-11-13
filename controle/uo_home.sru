@@ -23,13 +23,15 @@ end type
 global uo_home uo_home
 
 type variables
-w_ancestor iw_pai, iw_cad_usuario
+w_ancestor iw_pai, iw_cad_usuario, iw_cad_fornecedor, iw_cad_produto, iw_venda
 //w_cad_usuario iw_cad_usuario
 end variables
-
 forward prototypes
 public subroutine of_set_iw_pai (w_ancestor aw_pai)
 public subroutine of_abrir_funcionario ()
+public subroutine of_abrir_fornecedor ()
+public subroutine of_abrir_produto ()
+public subroutine of_abrir_venda ()
 end prototypes
 
 public subroutine of_set_iw_pai (w_ancestor aw_pai);iw_pai = aw_pai
@@ -39,6 +41,36 @@ public subroutine of_abrir_funcionario ();If Not IsValid(iw_cad_usuario) Then
 	OpenSheet( iw_cad_usuario, 'w_cad_usuario', iw_pai, 0 , Original!)
 Else
 	iw_cad_usuario.setfocus( )
+End If
+
+
+
+end subroutine
+
+public subroutine of_abrir_fornecedor ();If Not IsValid(iw_cad_fornecedor) Then 
+	OpenSheet( iw_cad_fornecedor, 'w_cad_fornecedor', iw_pai, 0 , Original!)
+Else
+	iw_cad_fornecedor.setfocus( )
+End If
+
+
+
+end subroutine
+
+public subroutine of_abrir_produto ();If Not IsValid(iw_cad_produto) Then 
+	OpenSheet( iw_cad_produto, 'w_cad_produto', iw_pai, 0 , Original!)
+Else
+	iw_cad_produto.setfocus( )
+End If
+
+
+
+end subroutine
+
+public subroutine of_abrir_venda ();If Not IsValid(iw_venda) Then 
+	OpenSheet( iw_venda, 'w_venda', iw_pai, 0 , Original!)
+Else
+	iw_venda.setfocus( )
 End If
 
 
@@ -87,6 +119,9 @@ boolean originalsize = true
 alignment htextalign = left!
 end type
 
+event clicked;of_abrir_venda()
+end event
+
 type pb_produtos from picturebutton within uo_home
 integer x = 2226
 integer y = 60
@@ -104,6 +139,9 @@ boolean originalsize = true
 alignment htextalign = left!
 end type
 
+event clicked;of_abrir_produto()
+end event
+
 type pb_fornecedor from picturebutton within uo_home
 integer x = 1143
 integer y = 60
@@ -120,6 +158,9 @@ string text = "Fornecedor"
 boolean originalsize = true
 alignment htextalign = left!
 end type
+
+event clicked;of_abrir_fornecedor()
+end event
 
 type pb_funcionario from picturebutton within uo_home
 integer x = 59

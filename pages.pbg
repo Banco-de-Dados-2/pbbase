@@ -4,6 +4,10 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "w_home.srw" "pages.pbl";
+ "w_cad_fornecedor.srw" "pages.pbl";
  "w_cad_usuario.srw" "pages.pbl";
+ "w_cad_produto.srw" "pages.pbl";
+ "w_pesquisa.srw" "pages.pbl";
+ "w_venda.srw" "pages.pbl";
  "w_frame.srw" "pages.pbl";
 @end;

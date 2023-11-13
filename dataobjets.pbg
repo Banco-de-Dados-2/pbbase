@@ -3,8 +3,16 @@ Save Format v3.0(19990112)
  "dataobjets.pbl" "";
 @end;
 @begin Objects
+ "d_emitir_venda_item.srd" "dataobjets.pbl";
+ "d_cad_fornecedor.srd" "dataobjets.pbl";
  "d_cad_funcionario.srd" "dataobjets.pbl";
  "d_pesquisa_funcionario.srd" "dataobjets.pbl";
+ "d_filtro_fornecedor.srd" "dataobjets.pbl";
  "d_filtro_funcionario.srd" "dataobjets.pbl";
+ "d_filtro_pesquisa.srd" "dataobjets.pbl";
+ "d_emitir_venda.srd" "dataobjets.pbl";
+ "d_filtro_produto.srd" "dataobjets.pbl";
+ "d_cad_produto.srd" "dataobjets.pbl";
+ "d_pesquisa.srd" "dataobjets.pbl";
  "d_contador.srd" "dataobjets.pbl";
 @end;

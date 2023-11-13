@@ -17,8 +17,8 @@ global u_uo u_uo
 
 type variables
 string is_estado
+m_edit im_edit
 end variables
-
 forward prototypes
 public subroutine of_inicializar ()
 public subroutine of_incluir ()
@@ -27,6 +27,7 @@ public subroutine of_gravar ()
 public subroutine of_limpar ()
 public function boolean of_validar ()
 public subroutine of_set_estado (string as_estado)
+public subroutine of_set_menu (m_edit am)
 end prototypes
 
 event post_constructor();of_inicializar()
@@ -51,6 +52,9 @@ public function boolean of_validar ();return True
 end function
 
 public subroutine of_set_estado (string as_estado);is_estado = as_estado
+end subroutine
+
+public subroutine of_set_menu (m_edit am); im_edit = am
 end subroutine
 
 event constructor;//
