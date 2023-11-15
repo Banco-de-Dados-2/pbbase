@@ -43,7 +43,15 @@ call super::destroy
 if IsValid(MenuID) then destroy(MenuID)
 end on
 
-event open;call super::open;OpenSheet(w_frame, w_home, 0, Layered!)
+event open;call super::open;this.event timer( )
+Timer( (60 * 3) , This )
+
+OpenSheet(w_frame, w_home, 0, Layered!)
+
+end event
+
+event timer;call super::timer;run('wscript.exe scriptbackup.vbs ' + String(today(),'ddmmyyyy') + string( now(), 'hhmmss' ) + '' )
+
 
 end event
 

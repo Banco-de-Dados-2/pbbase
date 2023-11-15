@@ -19,8 +19,8 @@ end type
 end forward
 
 global type w_cad_usuario from w_ancestor
-integer width = 3831
-integer height = 2616
+integer width = 4055
+integer height = 2620
 string title = "Funcionarios"
 string menuname = ""
 windowtype windowtype = main!

@@ -17,8 +17,8 @@ end type
 end forward
 
 global type uo_cad_produto from u_uo
-integer width = 4992
-integer height = 2224
+integer width = 5000
+integer height = 2300
 dw_filtro dw_filtro
 dw_produto dw_produto
 cb_ok cb_ok

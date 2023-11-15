@@ -7,8 +7,8 @@ end type
 end forward
 
 global type w_cad_fornecedor from w_ancestor
-integer width = 3717
-integer height = 2424
+integer width = 3936
+integer height = 2604
 string title = "Fornecedor"
 string menuname = ""
 windowtype windowtype = main!
@@ -77,6 +77,7 @@ event ue_excluir;call super::ue_excluir;//uo_cad.of_excluir()
 end event
 
 type uo_cad from uo_cad_fornecedor within w_cad_fornecedor
+integer width = 3698
 integer taborder = 30
 end type
 

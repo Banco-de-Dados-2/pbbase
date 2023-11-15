@@ -13,6 +13,7 @@ Save Format v3.0(19990112)
  "d_emitir_venda.srd" "dataobjets.pbl";
  "d_filtro_produto.srd" "dataobjets.pbl";
  "d_cad_produto.srd" "dataobjets.pbl";
+ "d_info_prod.srd" "dataobjets.pbl";
  "d_pesquisa.srd" "dataobjets.pbl";
  "d_contador.srd" "dataobjets.pbl";
 @end;

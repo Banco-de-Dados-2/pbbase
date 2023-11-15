@@ -2,6 +2,8 @@ HA$PBExportHeader$uo_emitir_venda.sru
 forward
 global type uo_emitir_venda from u_uo
 end type
+type dw_info from u_dw within uo_emitir_venda
+end type
 type dw_item from u_dw within uo_emitir_venda
 end type
 type dw_venda from u_dw within uo_emitir_venda
@@ -9,8 +11,9 @@ end type
 end forward
 
 global type uo_emitir_venda from u_uo
-integer width = 4530
-integer height = 2344
+integer width = 4498
+integer height = 2300
+dw_info dw_info
 dw_item dw_item
 dw_venda dw_venda
 end type
@@ -87,11 +90,15 @@ lw_pai = GetParent().GetParent()
 ids_funcionario = Create Nv_Datastore
 ids_funcionario.of_create_from_sql( " select FUN_CODIGO AS CODIGO, FUN_NOME AS DESCRICAO from DBA.TB_FUNCIONARIOS  " , True)
 
-ids_funcionario = Create Nv_Datastore
-ids_funcionario.of_create_from_sql( " select PRO_CODIGO AS CODIGO, PRO_DESCRICAO AS DESCRICAO from DBA.TB_PRODUTO  " , True)
+ids_produto = Create Nv_Datastore
+ids_produto.of_create_from_sql( " select PRO_CODIGO AS CODIGO, PRO_DESCRICAO AS DESCRICAO from DBA.TB_PRODUTO  " , True)
 
 dw_venda.of_set_w_pai( lw_pai )
 dw_venda.of_set_color_background( )
+dw_info.of_set_w_pai( lw_pai )
+dw_info.of_set_color_background( )
+dw_info.InsertRow(0)
+
 dw_venda.SetTransObject(SQLCA)
 dw_item.settransobject( SQLCA)
 This.Of_limpar()
@@ -167,9 +174,11 @@ End If
 end subroutine
 
 public subroutine of_busca_tabela (long row, boolean ab_clicked, string tipo);nv_pesquisa lnv_pesquisa
-
+Long ll_find, ll_null
 dw_venda.AcceptText()
 dw_item.AcceptText()
+
+SetNull(ll_null)
 
 lnv_pesquisa = Create nv_pesquisa
 If tipo = 'funcionarios' Then
@@ -178,6 +187,15 @@ If tipo = 'funcionarios' Then
 Elseif tipo = 'produto' Then
 	lnv_pesquisa.of_buscar_pesquisa( row, ab_clicked, dw_item , ids_produto , { "tb_itens_tb_produto_pro_codigo",  "tb_produto_pro_descricao", "dba.tb_produto" })	
 	dw_item.AcceptText()
+	ll_find = dw_item.find( 'tb_itens_tb_produto_pro_codigo = ' + String(Uf_null(dw_item.GetItemNumber( row, 'tb_itens_tb_produto_pro_codigo' ), 0)) , 1, dw_item.RowCount() )
+	If ll_find > 0 and ll_find <> row Then
+		Msg('Produto j$$HEX2$$e1002000$$ENDHEX$$listado')
+		dw_item.SetItem( row, 'tb_itens_tb_produto_pro_codigo', ll_null )
+		dw_item.SetFocus()
+		dw_item.SetRow(row)
+		Return
+	End If
+	dw_item.AcceptText()
 	Post of_get_preco( row )
 End If
 
@@ -185,18 +203,28 @@ Destroy( lnv_pesquisa )
 
 end subroutine
 
-public subroutine of_get_preco (long row);Decimal lde_preco
+public subroutine of_get_preco (long row);Decimal lde_preco, lde_qtd
 Long ll_codigo
 nv_produto lnv_produto
 
 lnv_produto = Create nv_produto 
 ll_codigo = uf_null(dw_item.GetItemNumber(row, 'tb_itens_tb_produto_pro_codigo'), 0)
 lde_preco = lnv_produto.of_get_preco( ll_codigo )
+lde_qtd = lnv_produto.of_get_qtd( ll_codigo )
 
 If lde_preco > 0 Then
+	dw_item.SetItem(row, 'tb_produto_pro_valor', lde_preco )
 	dw_item.SetItem(row, 'tb_itens_ite_valor_parceial', lde_preco )
+	dw_info.SetItem(1, 'valor', lde_preco)
 	dw_item.AcceptText()
 	dw_item.event itemchanged( row , dw_item.object.tb_itens_ite_valor_parceial , String(lde_preco))
+End If
+
+If lde_qtd > 0 Then
+	dw_item.SetItem(row, 'tb_produto_pro_quantidade', lde_qtd )
+	dw_info.SetItem(1, 'qtd', lde_qtd)
+	dw_item.AcceptText()
+	dw_item.event itemchanged( row , dw_item.object.tb_produto_pro_quantidade , String(lde_qtd))
 End If
 end subroutine
 
@@ -250,20 +278,20 @@ If lb_inserindo Then
 		ll_qtd = uf_null(dw_item.GetItemNumber( ll_for, 'tb_itens_ite_quantidade' ),0)
 		ll_produto = uf_null(dw_item.GetItemNumber( ll_for, 'tb_itens_tb_produto_pro_codigo' ),0)
 		ll_item = uf_null(dw_item.GetItemNumber( ll_for, 'tb_itens_ite_codigo' ),0)
-		If lde_valoruniotario <= 0 Then 
-			Msg("Valor Invalido")
-			Return False
-		End If
-		If ll_qtd <= 0 Then 
-			Msg("Qtd Invalida")
-			Return False
-		End If
 		If ll_item <= 0 Then 
 			Msg("Produto N$$HEX1$$e300$$ENDHEX$$o Existe")
 			Return False
 		End If
 		if lnv_pesquisa.of_busca_codigo(  'dba.tb_produto'  , ll_produto) <= 0 Then 
 			Msg("Produto N$$HEX1$$e300$$ENDHEX$$o Existe")
+			Return False
+		End If
+		If lde_valoruniotario <= 0 Then 
+			Msg("Valor Invalido")
+			Return False
+		End If
+		If ll_qtd <= 0 Then 
+			Msg("Qtd Invalida")
 			Return False
 		End If
 	Next
@@ -280,15 +308,18 @@ end function
 on uo_emitir_venda.create
 int iCurrent
 call super::create
+this.dw_info=create dw_info
 this.dw_item=create dw_item
 this.dw_venda=create dw_venda
 iCurrent=UpperBound(this.Control)
-this.Control[iCurrent+1]=this.dw_item
-this.Control[iCurrent+2]=this.dw_venda
+this.Control[iCurrent+1]=this.dw_info
+this.Control[iCurrent+2]=this.dw_item
+this.Control[iCurrent+3]=this.dw_venda
 end on
 
 on uo_emitir_venda.destroy
 call super::destroy
+destroy(this.dw_info)
 destroy(this.dw_item)
 destroy(this.dw_venda)
 end on
@@ -299,6 +330,16 @@ end event
 event destructor;call super::destructor;Destroy(ids_funcionario)
 end event
 
+type dw_info from u_dw within uo_emitir_venda
+integer x = 146
+integer y = 2160
+integer width = 1925
+integer height = 108
+integer taborder = 30
+string dataobject = "d_info_prod"
+boolean border = false
+end type
+
 type dw_item from u_dw within uo_emitir_venda
 integer x = 37
 integer y = 392
@@ -308,24 +349,37 @@ integer taborder = 20
 string dataobject = "d_emitir_venda_item"
 end type
 
-event clicked;call super::clicked;If row > 0 Then	
+event clicked;call super::clicked;Long ll_find
+
+If row > 0 Then	
 	If this.GetSelectedRow(0) > 0 Then this.selectRow( this.GetSelectedRow(0), False)
 	this.selectRow( row , true)
 	If dwo.Name = 'b_produto' Then
-		Post of_busca_tabela( row, true, 'produto' )
-		
+		Post of_busca_tabela( row, True, 'produto' )
 	End If
 End If
 end event
 
-event itemchanged;call super::itemchanged;If dwo.Name = 'tb_itens_tb_produto_pro_codigo' Then
+event itemchanged;call super::itemchanged;Long ll_find
+
+If dwo.Name = 'tb_itens_tb_produto_pro_codigo' Then
 	Post of_busca_tabela( row, false, 'produto' )
-	
 End If
 
 If dwo.name = 'tb_itens_ite_valor_parceial' or dwo.name = 'tb_itens_ite_quantidade' Then
 	Post of_atualiza_total()
 End If
+end event
+
+event rowfocuschanged;call super::rowfocuschanged;If currentrow > 0 Then
+	dw_info.SetItem(1, 'valor', Uf_Null(this.GetItemNumber(currentrow, 'tb_produto_pro_valor'),0))
+	dw_info.SetItem(1, 'qtd', Uf_Null(this.GetItemNumber(currentrow, 'tb_produto_pro_quantidade'),0))
+Else 
+	dw_info.SetItem(1, 'valor', 0)
+	dw_info.SetItem(1, 'qtd', 0)	
+End If
+
+dw_info.Accepttext( )
 end event
 
 type dw_venda from u_dw within uo_emitir_venda

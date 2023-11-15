@@ -14,8 +14,8 @@ end type
 end forward
 
 global type w_venda from w_ancestor
-integer width = 4480
-integer height = 2488
+integer width = 4535
+integer height = 2704
 string title = "Vendas"
 string menuname = ""
 windowtype windowtype = main!
@@ -93,7 +93,7 @@ end event
 
 type tab_vendas from tab within w_venda
 integer width = 4379
-integer height = 2324
+integer height = 2416
 integer taborder = 10
 integer textsize = -10
 integer weight = 700
@@ -122,7 +122,7 @@ type tabpage_emitir from uo_emitir_venda within tab_vendas
 integer x = 18
 integer y = 112
 integer width = 4343
-integer height = 2196
+integer height = 2288
 string text = "Emitir"
 end type
 

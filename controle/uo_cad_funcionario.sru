@@ -7,8 +7,8 @@ end type
 end forward
 
 global type uo_cad_funcionario from u_uo
-integer width = 3657
-integer height = 2284
+integer width = 3700
+integer height = 2300
 dw_cad_funcionario dw_cad_funcionario
 end type
 global uo_cad_funcionario uo_cad_funcionario
@@ -18,6 +18,7 @@ nv_dados inv_dados
 w_cad_usuario iw_pai
 Boolean lb_alterando = False, lb_inserindo = False
 end variables
+
 forward prototypes
 public subroutine of_inicializar ()
 public subroutine of_incluir ()

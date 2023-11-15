@@ -39,14 +39,14 @@ Else
 			adw.accepttext( )
 		Else
 			GOTO W_PES
-			Msg("N$$HEX1$$e300$$ENDHEX$$o foi encontrado nenhum fornecedor")
+			Msg("N$$HEX1$$e300$$ENDHEX$$o foi encontrado nenhum registro")
 		End If
 	Else
 		If ads.Retrieve() > 0 Then
 			GOTO FORN
 		Else
 			GOTO W_PES
-			Msg("N$$HEX1$$e300$$ENDHEX$$o foi encontrado nenhum fornecedor")
+			Msg("N$$HEX1$$e300$$ENDHEX$$o foi encontrado nenhum registro")
 		End If
 	End If
 End If

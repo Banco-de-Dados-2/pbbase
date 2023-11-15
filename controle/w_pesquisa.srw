@@ -25,6 +25,7 @@ global w_pesquisa w_pesquisa
 type variables
 w_ancestor iw_pai 
 end variables
+
 forward prototypes
 public function boolean of_gerar_sql (string as_tabela)
 public subroutine of_retorna (boolean ab_valida, long row)

@@ -7,8 +7,8 @@ end type
 end forward
 
 global type w_cad_produto from w_ancestor
-integer width = 5083
-integer height = 2360
+integer width = 5138
+integer height = 2480
 string title = "Produtos"
 string menuname = ""
 windowtype windowtype = main!
@@ -74,6 +74,7 @@ event ue_limpar;call super::ue_limpar;uo_cad.of_limpar()
 end event
 
 type uo_cad from uo_cad_produto within w_cad_produto
+integer width = 5001
 integer taborder = 30
 end type
 

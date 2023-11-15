@@ -17,8 +17,8 @@ end type
 end forward
 
 global type uo_cad_fornecedor from u_uo
-integer width = 3657
-integer height = 2284
+integer width = 3700
+integer height = 2300
 cb_cancel cb_cancel
 cb_ok cb_ok
 dw_fornecedor dw_fornecedor
@@ -36,6 +36,7 @@ Boolean lb_alterando = False, lb_inserindo = False
 
 KeyCode IKey
 end variables
+
 forward prototypes
 public subroutine of_inicializar ()
 public subroutine of_retrieve ()

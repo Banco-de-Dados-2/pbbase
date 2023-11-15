@@ -15,8 +15,8 @@ end type
 end forward
 
 global type uo_pesquisa_funcionario from u_uo
-integer width = 3657
-integer height = 2284
+integer width = 3700
+integer height = 2300
 cb_ok cb_ok
 dw_filtro dw_filtro
 dw_funcionario dw_funcionario

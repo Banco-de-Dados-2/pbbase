@@ -13,8 +13,8 @@ end type
 end forward
 
 global type uo_home from u_uo
-integer width = 4389
-integer height = 1884
+integer width = 4500
+integer height = 2300
 pb_vendas pb_vendas
 pb_produtos pb_produtos
 pb_fornecedor pb_fornecedor
@@ -26,6 +26,7 @@ type variables
 w_ancestor iw_pai, iw_cad_usuario, iw_cad_fornecedor, iw_cad_produto, iw_venda
 //w_cad_usuario iw_cad_usuario
 end variables
+
 forward prototypes
 public subroutine of_set_iw_pai (w_ancestor aw_pai)
 public subroutine of_abrir_funcionario ()
