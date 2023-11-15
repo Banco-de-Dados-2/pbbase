@@ -1,2 +1,10 @@
 *.pbl
-*.prp
+*.pbw
+*.opt
+*.pbc
+*.htm
+*.html
+*.ini
+*.orig
+*.db-shm
+*.db-wal
