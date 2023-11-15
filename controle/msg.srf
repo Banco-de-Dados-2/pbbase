@@ -6,6 +6,6 @@ forward prototypes
 global subroutine msg (string as_msg)
 end prototypes
 
-global subroutine msg (string as_msg);MessageBox( gs_sistema, as_msg)
+global subroutine msg (string as_msg);MessageBox(gs_sistema, as_msg)
 end subroutine
 
