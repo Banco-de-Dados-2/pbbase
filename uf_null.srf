@@ -1,0 +1,19 @@
+HA$PBExportHeader$uf_null.srf
+global type uf_null from function_object
+end type
+
+forward prototypes
+global function any uf_null (any aa_valor, any aa_retorno)
+end prototypes
+
+global function any uf_null (any aa_valor, any aa_retorno);any la_retorno
+
+If IsNull(aa_valor) Then
+	la_retorno = aa_retorno
+Else
+	la_retorno = aa_valor
+End If
+
+Return la_retorno
+end function
+
