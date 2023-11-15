@@ -9,3 +9,4 @@
 *.orig
 *.db-shm
 *.db-wal
+/backup
