@@ -12,11 +12,10 @@ end forward
 
 global variables
 Boolean gb_desenv
-String gs_sistema = 'Banco'
-
+String gs_sistema = 'Banco', gs_directory = GetCurrentDirectory ( )
+String gs_directory_backup = gs_directory  +'/backup'
 
 end variables
-
 global type vendabase from application
 string appname = "vendabase"
 end type
