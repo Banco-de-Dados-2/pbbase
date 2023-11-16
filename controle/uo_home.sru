@@ -13,7 +13,7 @@ end type
 end forward
 
 global type uo_home from u_uo
-integer width = 4500
+integer width = 4498
 integer height = 2300
 pb_vendas pb_vendas
 pb_produtos pb_produtos
@@ -104,10 +104,10 @@ destroy(this.pb_funcionario)
 end on
 
 type pb_vendas from picturebutton within uo_home
-integer x = 3310
-integer y = 60
-integer width = 960
-integer height = 528
+integer x = 3515
+integer y = 8
+integer width = 731
+integer height = 576
 integer taborder = 10
 integer textsize = -10
 integer weight = 400
@@ -115,19 +115,20 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string text = "Vendas"
-boolean originalsize = true
+string pointer = "HyperLink!"
+string picturename = "C:\GitClone\powerbuilder\vendabase\imagens\home_venda.jpg"
 alignment htextalign = left!
+string powertiptext = "Vendas"
 end type
 
 event clicked;of_abrir_venda()
 end event
 
 type pb_produtos from picturebutton within uo_home
-integer x = 2226
-integer y = 60
-integer width = 960
-integer height = 528
+integer x = 2363
+integer y = 8
+integer width = 731
+integer height = 576
 integer taborder = 10
 integer textsize = -10
 integer weight = 400
@@ -135,19 +136,20 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string text = "Produtos"
-boolean originalsize = true
+string pointer = "HyperLink!"
+string picturename = "imagens\home_produto.jpg"
 alignment htextalign = left!
+string powertiptext = "Produtos"
 end type
 
 event clicked;of_abrir_produto()
 end event
 
 type pb_fornecedor from picturebutton within uo_home
-integer x = 1143
-integer y = 60
-integer width = 960
-integer height = 528
+integer x = 1211
+integer y = 8
+integer width = 731
+integer height = 576
 integer taborder = 10
 integer textsize = -10
 integer weight = 400
@@ -155,9 +157,10 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string text = "Fornecedor"
-boolean originalsize = true
+string pointer = "HyperLink!"
+string picturename = "imagens\home_fornecedor.jpg"
 alignment htextalign = left!
+string powertiptext = "Fornecedor"
 end type
 
 event clicked;of_abrir_fornecedor()
@@ -165,9 +168,9 @@ end event
 
 type pb_funcionario from picturebutton within uo_home
 integer x = 59
-integer y = 60
-integer width = 960
-integer height = 528
+integer y = 8
+integer width = 731
+integer height = 576
 integer taborder = 10
 integer textsize = -10
 integer weight = 400
@@ -175,9 +178,10 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
-string text = "Funcionario"
-boolean originalsize = true
+string pointer = "HyperLink!"
+string picturename = "imagens\home_funcionario.jpg"
 alignment htextalign = left!
+string powertiptext = "Funcionarios"
 end type
 
 event clicked;of_abrir_funcionario()

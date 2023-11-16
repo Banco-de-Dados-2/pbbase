@@ -7,7 +7,7 @@ end type
 end forward
 
 global type uo_cad_funcionario from u_uo
-integer width = 3700
+integer width = 3698
 integer height = 2300
 dw_cad_funcionario dw_cad_funcionario
 end type
@@ -355,6 +355,7 @@ integer height = 860
 integer taborder = 10
 string dataobject = "d_cad_funcionario"
 boolean border = false
+boolean livescroll = false
 end type
 
 event itemchanged;call super::itemchanged;If dwo.Name = 'fun_codigo' and lb_alterando = False And lb_inserindo = False Then

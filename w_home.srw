@@ -19,6 +19,7 @@ w_ancestor iw_ativa
 m_edit im_edit = m_edit
 nv_backup inv_backup
 end variables
+
 forward prototypes
 public function w_ancestor of_getwindowativa ()
 public subroutine of_set_window (w_ancestor aw_window)
