@@ -1,0 +1,20 @@
+HA$PBExportHeader$uf_strtran.srf
+global type uf_strtran from function_object
+end type
+
+forward prototypes
+global function string uf_strtran (string as_texto, readonly string as_antigo, readonly string as_novo)
+end prototypes
+
+global function string uf_strtran (string as_texto, readonly string as_antigo, readonly string as_novo);long ll_start_pos=1
+
+ll_start_pos = Pos(as_texto, as_antigo, ll_start_pos)
+
+Do While ll_start_pos > 0
+	as_texto = Replace(as_texto, ll_start_pos, Len(as_antigo), as_novo)
+	ll_start_pos = Pos(as_texto, as_antigo, ll_start_pos+Len(as_novo))
+loop
+
+return as_texto
+end function
+

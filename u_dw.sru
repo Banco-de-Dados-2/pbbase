@@ -83,3 +83,168 @@ end on
 on u_dw.destroy
 end on
 
+event dberror;If SQLDBCode = -308 Or SQLDBCode = -108 Or Pos( Upper( SQLErrText ), "08003" ) > 0 Then
+	MessageBox(gs_Sistema, "A conex$$HEX1$$e300$$ENDHEX$$o com o banco de dados foi perdida, o sistema ser$$HEX2$$e1002000$$ENDHEX$$finalizado.", StopSign!)
+	
+	DISCONNECT USING SQLCA;
+	
+	Halt Close
+End If
+
+String ls_Msg1, ls_Msg2, ls_Column, ls_Col1, ls_Col2, ls_Chaves, ls_Campos = ""
+Long ll_Pos, ll_Pos2, ll_Count, ll_For
+s_Parm ls_Manda
+
+If SQLDBCode >= -198 And SQLDBCode <= -198 And SQLDBCode <> 0 Then
+	ls_Column = Trim(Upper(SQLErrText))
+	
+	ll_Pos = Pos(Upper(ls_Column), "FROM")
+	ls_Col1 = Mid(ls_Column, ll_Pos + 4, 100)
+	
+	ll_Pos = Pos(Upper(Trim(ls_Col1))," ")
+	ls_Col2 = Trim(Mid(ls_Col1, 1, ll_Pos))
+	
+	ls_Manda.String[1] = "Este registro n$$HEX1$$e300$$ENDHEX$$o pode ser eliminado/alterado porque est$$HEX2$$e1002000$$ENDHEX$$relacionado a outros registros."
+	ls_Manda.String[2] = "Este registro n$$HEX1$$e300$$ENDHEX$$o pode ser eliminado da tabela " + String(ls_Col2) + " pois j$$HEX2$$e1002000$$ENDHEX$$est$$HEX2$$e1002000$$ENDHEX$$relacionado com outra tabela."
+	
+	ROLLBACK USING SQLCA;
+	
+	If not isValid(w_Msg_Erro) Then
+		OpenWithParm(w_Msg_Erro, ls_Manda)
+	End If
+	
+	Return 3
+End If
+
+nv_DataStore lds_Aux
+lds_Aux = Create nv_DataStore
+
+If SQLDBCode = -195 Or SQLDBCode = -209 Then
+	ll_Pos = Pos(SQLErrText, "column")
+	ls_Column = Mid(SQLErrText, ll_Pos, 100)
+	
+	ls_Col1 = Mid(ls_Column, Pos(ls_Column, "'") + 1, 100)
+	ls_Col1 = Mid(ls_Col1, 1, Pos(ls_Col1, "'") - 1)
+	
+	ls_Col2 = Mid(ls_Column, Pos(ls_Column, "in table '"), 50)
+	ls_Col2 = Mid(ls_Col2, Pos(ls_Col2, "'") + 1, 50) 
+	ls_Col2 = Mid(ls_Col2, 1, Pos(ls_Col2, "'") - 1)
+	
+	ls_Msg1 = "N$$HEX1$$e300$$ENDHEX$$o foi poss$$HEX1$$ed00$$ENDHEX$$vel gravar este registro!~rVerifique se o conte$$HEX1$$fa00$$ENDHEX$$do do campo " + ls_Col1 + " da tabela " + ls_Col2 + " foi preenchido corretamente."
+	ls_Msg2 = SQLErrText
+End If
+
+If SQLDBCode = -196 Then
+	ll_Pos = Pos(SQLErrText, "index")
+	ls_Column = Mid(SQLErrText, ll_Pos, 100)
+	
+	ls_Col1 = Mid(ls_Column, Pos(ls_Column, "'") + 1, 100)
+	ls_Col1 = Mid(ls_Col1, 1, Pos(ls_Col1, "'") - 1)
+	ls_Col1 = uf_strtran(ls_Col1, '_', ', ')
+	
+	ls_Col2 = Mid(ls_Column, Pos(ls_Column, "table"), 100)
+	ls_Col2 = Mid(ls_Col2, Pos(ls_Col2, "'") + 1, 100) 
+	ls_Col2 = Mid(ls_Col2, 1, Pos(ls_Col2, "'") - 1)
+	
+   ls_Msg1 = "N$$HEX1$$e300$$ENDHEX$$o foi poss$$HEX1$$ed00$$ENDHEX$$vel gravar ou inserir os dados!~rOs campos " + ls_Col1 + " da tabela " + ls_Col2 + " n$$HEX1$$e300$$ENDHEX$$o aceitam valores duplicados."
+	ls_Msg2 = SQLErrText
+End If
+
+If SQLDBCode = -194 Then
+	ll_Pos = Pos(SQLErrText,"foreign key")
+	ls_Column = Mid(SQLErrText, ll_Pos, 100)
+	
+	ls_Col2 = Mid(ls_Column, Pos(ls_Column,"'") + 1, 100)
+	ls_Col2 = Mid(ls_Col2, 1, Pos(ls_Col2,"'") - 1)
+	
+	lds_Aux.DataObject = "d_constraint"
+	lds_Aux.SetTransObject(SQLCA)
+	
+	If lds_Aux.Retrieve(ls_Col2, "%FK%") > 0 Then
+		ll_Count = lds_Aux.rowcount()
+		
+		For ll_For = 1 To ll_Count
+			If ll_For = 1 Then 
+				ls_Campos = lds_Aux.GetItemString(ll_For, "column_name")
+			Else
+				ls_Campos += ", " + lds_Aux.GetItemString(ll_For, "column_name")
+			End If
+		Next
+		
+		ls_Msg1 = "Os dados do(s) campo(s) " + ls_Campos + " que est$$HEX1$$e300$$ENDHEX$$o sendo tentados gravar na tabela " + lds_Aux.GetItemString(1, "tabelafilha") + ", n$$HEX1$$e300$$ENDHEX$$o est$$HEX1$$e300$$ENDHEX$$o cadastrados na tabela ~r" + lds_Aux.GetItemString(1, "tabelapai") + ".~r"		
+	End If	
+	
+	ls_Msg2 = "C$$HEX1$$f300$$ENDHEX$$digo do Retorno da Opera$$HEX2$$e700e300$$ENDHEX$$o : " + String(SQLDBCode) + " Msg : " + SQLErrText
+End If		
+
+If SQLDBCode = -3 Then
+	ll_Pos = Pos(SQLErrText, "UPDATE")
+	
+	If ll_Pos = 0 Then
+		ll_Pos = Pos(SQLErrText, "DELETE FROM")
+		ll_Pos2 = Pos(SQLErrText, "WHERE")
+		
+		ls_Column = Mid(SQLErrText, ll_Pos + 11, ll_Pos2)
+		ls_Column = Replace(ls_Column, ll_Pos2 - ll_Pos - 11, Len(ls_Column), "")
+	Else
+		ll_Pos2 = Pos(SQLErrText, "SET")
+		
+		ls_Column = Mid(SQLErrText, ll_Pos + 7, ll_Pos2)
+		ls_Column = Replace(ls_Column, ll_Pos2 - ll_Pos - 7, Len(ls_Column), "")
+	End If
+	
+	If Len(Trim(ls_Column)) > 0 Then
+		MessageBox(gs_Sistema, "Relacionamento (" + ls_Column + ") n$$HEX1$$e300$$ENDHEX$$o mais existente!")
+	Else
+		MessageBox(gs_Sistema, "Relacionamento n$$HEX1$$e300$$ENDHEX$$o mais existente, favor carregar os dados novamente!")
+	End If
+	
+	Return 3
+End If	
+
+If SQLDBCode = -193 Then
+	ll_Pos = Pos(SQLErrText, "table")
+	ls_Column = Mid(SQLErrText, ll_Pos, 100)
+	
+	ls_Col2 = Mid(ls_Column, Pos(ls_Column, "'") + 1, 100)
+	ls_Col2 = Mid(ls_Col2, 1, Pos(ls_Col2, "'") - 1)
+	
+	lds_Aux.Reset()
+   lds_Aux.DataObject = 'd_constraint'	
+	lds_Aux.SetTransObject(SQLCA)
+	ll_Count = lds_Aux.Retrieve(ls_Col2, "%PK%")
+	
+	For ll_For = 1 To ll_Count
+		If ll_For = 1 Then 
+			ls_Chaves = lds_Aux.GetItemString(ll_For, "column_name")
+		Else
+			ls_Chaves += ", " + lds_Aux.GetItemString(ll_For, "column_name")
+		End If
+	Next	
+	
+	ls_Msg1 = "O banco de dados n$$HEX1$$e300$$ENDHEX$$o permite que sejam gravados dois registros na tabela " + ls_Col2 + " com as mesmas informa$$HEX2$$e700f500$$ENDHEX$$es na chave prim$$HEX1$$e100$$ENDHEX$$ria(campos obrigat$$HEX1$$f300$$ENDHEX$$rios). Os campos da chave prim$$HEX1$$e100$$ENDHEX$$ria(campos obrigat$$HEX1$$f300$$ENDHEX$$rios) s$$HEX1$$e300$$ENDHEX$$o:~r" + ls_Chaves + ".~r"
+	ls_Msg2 = SQLErrText
+End If		
+
+If SQLDBCode = -158 Then
+	ls_Msg1 = "Valor informado $$HEX2$$e9002000$$ENDHEX$$muito grande para ser armazenado!.~r"
+	ls_Msg2 = SQLErrText
+End If	
+
+If ls_Msg1 <> "" Then
+	ls_Manda.String[1] = ls_Msg1
+	ls_Manda.String[2] = ls_Msg2
+Else
+	ls_Manda.String[1] = "~r~rOpera$$HEX2$$e700e300$$ENDHEX$$o n$$HEX1$$e300$$ENDHEX$$o permitida! C$$HEX1$$f300$$ENDHEX$$digo do Retorno da Opera$$HEX2$$e700e300$$ENDHEX$$o: " + String(SQLDBCode)
+	ls_Manda.String[2] = SQLErrText
+End If	
+
+ROLLBACK USING SQLCA;
+
+If not isValid(w_Msg_Erro) Then
+	OpenWithParm(w_Msg_Erro, ls_Manda)
+End If
+
+Return 3
+end event
+

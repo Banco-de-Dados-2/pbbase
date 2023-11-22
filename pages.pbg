@@ -3,6 +3,7 @@ Save Format v3.0(19990112)
  "pages.pbl" "";
 @end;
 @begin Objects
+ "w_msg_erro.srw" "pages.pbl";
  "w_home.srw" "pages.pbl";
  "w_cad_fornecedor.srw" "pages.pbl";
  "w_cad_usuario.srw" "pages.pbl";
