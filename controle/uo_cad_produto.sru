@@ -17,7 +17,7 @@ end type
 end forward
 
 global type uo_cad_produto from u_uo
-integer width = 5000
+integer width = 5001
 integer height = 2300
 dw_filtro dw_filtro
 dw_produto dw_produto
@@ -78,6 +78,10 @@ end subroutine
 public subroutine of_editar_dw (long row);If  dw_produto.GetItemString( row, 'flageditar') = 'F' Then
 	dw_produto.AcceptText()
 	dw_produto.SetItem( row, 'flageditar', 'T')
+	If Not dw_produto.of_lock_table( 'pro_codigo' , dw_produto.GetItemNumber(row, 'pro_codigo') ) Then
+		dw_produto.SetItem( row, 'flageditar', 'F')		
+	End If
+	dw_produto.AcceptText()
 Else
 	dw_produto.AcceptText()
 	dw_produto.SetItem( row, 'flageditar', 'F')

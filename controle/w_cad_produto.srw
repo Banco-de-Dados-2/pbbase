@@ -7,7 +7,7 @@ end type
 end forward
 
 global type w_cad_produto from w_ancestor
-integer width = 5138
+integer width = 5111
 integer height = 2480
 string title = "Produtos"
 string menuname = ""

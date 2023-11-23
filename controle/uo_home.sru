@@ -116,7 +116,7 @@ fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 string pointer = "HyperLink!"
-string picturename = "C:\GitClone\powerbuilder\vendabase\imagens\home_venda.jpg"
+string picturename = "imagens\home_venda.jpg"
 alignment htextalign = left!
 string powertiptext = "Vendas"
 end type

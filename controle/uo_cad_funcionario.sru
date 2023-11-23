@@ -356,6 +356,7 @@ integer taborder = 10
 string dataobject = "d_cad_funcionario"
 boolean border = false
 boolean livescroll = false
+boolean ib_forupdate = true
 end type
 
 event itemchanged;call super::itemchanged;If dwo.Name = 'fun_codigo' and lb_alterando = False And lb_inserindo = False Then

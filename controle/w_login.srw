@@ -124,6 +124,9 @@ string text = "&Sair"
 boolean cancel = true
 end type
 
+event clicked;call super::clicked;Halt
+end event
+
 type cb_logar from u_cb within w_login
 integer x = 1061
 integer y = 880

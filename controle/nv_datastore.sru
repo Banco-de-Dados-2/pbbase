@@ -11,9 +11,11 @@ global nv_datastore nv_datastore
 type variables
 Boolean ib_NoWait, ib_ForUpdate
 end variables
+
 forward prototypes
 public function integer of_create_from_sql (string as_sql, boolean ab_retrieve)
 public function integer of_update ()
+public function Boolean of_lock_table (string as_col, long al_pk)
 end prototypes
 
 public function integer of_create_from_sql (string as_sql, boolean ab_retrieve);String ERRORS, ls_Syntax
@@ -53,6 +55,26 @@ finally
 end try
 end function
 
+public function Boolean of_lock_table (string as_col, long al_pk);String ls_table, ls_exec
+
+ls_table = this.Describe("Datawindow.table.updatetable")
+
+ls_exec = "SELECT 1 FROM " + ls_table + " WHERE " + as_col + " = " + String(al_pk) + " FOR UPDATE NOWAIT"
+
+EXECUTE IMMEDIATE :ls_exec USING SQLCA;
+
+
+If SQLCA.SQLCode <> 0 Then
+	this.event dberror( SQLCA.SQLCode , SQLCA.SQLErrText , 'SELECT', Primary!,  0 )
+	Return False
+Else
+	Return True
+End If
+
+
+	
+end function
+
 on nv_datastore.create
 call super::create
 TriggerEvent( this, "constructor" )
@@ -68,7 +90,7 @@ event sqlpreview;String ls_Operacao
 Try
 	If isValid(SQLCA) Then
 		Choose Case SQLType
-			Case PreviewInsert!
+			Case PreviewSelect!
 				If ib_NoWait Then
 					SetSQLPreview(SQLSyntax + " NOWAIT")
 				ElseIf ib_ForUpdate Then

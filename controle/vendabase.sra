@@ -12,11 +12,10 @@ end forward
 
 global variables
 Boolean gb_desenv
-String gs_sistema = 'Banco', gs_directory = GetCurrentDirectory ( )
-String gs_directory_backup = gs_directory  +'/backup'
+String gs_sistema = 'Banco', gs_directory
+String gs_directory_backup 
 
 end variables
-
 global type vendabase from application
 string appname = "vendabase"
 end type
@@ -47,6 +46,8 @@ SQLCA.DBParm = "ConnectString='DSN=PostgreSQL35W;UID=logi;PWD=jw8s0F4'"
 CONNECT USING SQLCA;
 
 gb_desenv = True
+gs_directory = GetCurrentDirectory ( )
+gs_directory_backup = gs_directory  +'/backup'
 
 Open(w_login)
 end event

@@ -17,7 +17,7 @@ end type
 end forward
 
 global type uo_cad_fornecedor from u_uo
-integer width = 3700
+integer width = 3698
 integer height = 2300
 cb_cancel cb_cancel
 cb_ok cb_ok
@@ -116,6 +116,10 @@ end subroutine
 public subroutine of_editar_dw (long row);If  dw_fornecedor.GetItemString( row, 'flageditar') = 'F' Then
 	dw_fornecedor.AcceptText()
 	dw_fornecedor.SetItem( row, 'flageditar', 'T')
+	If Not dw_fornecedor.of_lock_table( 'for_codigo' , dw_fornecedor.GetItemNumber(row, 'for_codigo') ) Then
+		dw_fornecedor.SetItem( row, 'flageditar', 'F')		
+	End If
+	dw_fornecedor.AcceptText()
 Else
 	dw_fornecedor.AcceptText()
 	dw_fornecedor.SetItem( row, 'flageditar', 'F')

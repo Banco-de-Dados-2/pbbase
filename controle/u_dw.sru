@@ -15,7 +15,7 @@ end type
 global u_dw u_dw
 
 type variables
-Boolean ib_NoWait, ib_ForUpdate
+Boolean ib_NoWait, ib_ForUpdate 
 w_ancestor iw_pai
 end variables
 forward prototypes
@@ -23,6 +23,7 @@ public subroutine of_set_color_background ()
 public subroutine of_bloq_campo (string as_campos[], boolean ab_bloq)
 public subroutine of_set_w_pai (w_ancestor aw_window)
 public function integer of_update ()
+public function boolean of_lock_table (string as_col, long al_pk)
 end prototypes
 
 event ue_key;//
@@ -76,6 +77,26 @@ catch ( DWRuntimeError e)
 finally
 	return ll_retorno
 end try
+end function
+
+public function boolean of_lock_table (string as_col, long al_pk);String ls_table, ls_exec
+
+ls_table = this.Describe("Datawindow.table.updatetable")
+
+ls_exec = "SELECT 1 FROM " + ls_table + " WHERE " + as_col + " = " + String(al_pk) + " FOR UPDATE NOWAIT"
+
+EXECUTE IMMEDIATE :ls_exec USING SQLCA;
+
+
+If SQLCA.SQLCode <> 0 Then
+	this.event dberror( SQLCA.SQLCode , SQLCA.SQLErrText , 'SELECT', Primary!,  0 )
+	Return False
+Else
+	Return True
+End If
+
+
+	
 end function
 
 on u_dw.create
@@ -254,7 +275,7 @@ event sqlpreview;String ls_Operacao
 Try
 	If isValid(SQLCA) Then
 		Choose Case SQLType
-			Case PreviewInsert!
+			Case PreviewSelect!
 				If ib_NoWait Then
 					SetSQLPreview(SQLSyntax + " NOWAIT")
 				ElseIf ib_ForUpdate Then
@@ -265,5 +286,8 @@ Try
 Catch (RunTimeError e)
 	Return 0
 End Try
+end event
+
+event destructor;ROLLBACK USING SQLCA;
 end event
 
