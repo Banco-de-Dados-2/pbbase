@@ -15,9 +15,9 @@ end type
 global u_dw u_dw
 
 type variables
+Boolean ib_NoWait, ib_ForUpdate
 w_ancestor iw_pai
 end variables
-
 forward prototypes
 public subroutine of_set_color_background ()
 public subroutine of_bloq_campo (string as_campos[], boolean ab_bloq)
@@ -66,15 +66,16 @@ end subroutine
 public function integer of_update ();long ll_retorno
 
 try 
-	ll_retorno = this.update()
-catch ( Exception e )
+	ll_retorno = this.update(True, False)
+	If ll_retorno = 1 Then
+		this.ResetUpdate()
+	End If
+catch ( DWRuntimeError e)
 	Msg(e.Text)
 	ll_retorno = -1
 finally
 	return ll_retorno
 end try
-	
-
 end function
 
 on u_dw.create
@@ -246,5 +247,23 @@ If not isValid(w_Msg_Erro) Then
 End If
 
 Return 3
+end event
+
+event sqlpreview;String ls_Operacao
+
+Try
+	If isValid(SQLCA) Then
+		Choose Case SQLType
+			Case PreviewInsert!
+				If ib_NoWait Then
+					SetSQLPreview(SQLSyntax + " NOWAIT")
+				ElseIf ib_ForUpdate Then
+					SetSQLPreview(SQLSyntax + " FOR UPDATE NOWAIT")
+				End If
+		End Choose
+	End If
+Catch (RunTimeError e)
+	Return 0
+End Try
 end event
 
