@@ -7,15 +7,14 @@ end type
 end forward
 
 global type w_ancestor from window
-integer width = 6336
-integer height = 2056
+integer width = 6309
+integer height = 2032
 boolean titlebar = true
 string title = "Ancestor"
 string menuname = "m_edit"
 boolean controlmenu = true
 boolean minbox = true
 boolean maxbox = true
-boolean resizable = true
 windowtype windowtype = mdihelp!
 long backcolor = 67108864
 string icon = "imagens\logo.ico"

@@ -181,8 +181,8 @@ dw_item.AcceptText()
 SetNull(ll_null)
 
 lnv_pesquisa = Create nv_pesquisa
-If tipo = 'funcionarios' Then
-	lnv_pesquisa.of_buscar_pesquisa( row, ab_clicked, dw_venda, ids_funcionario, { "tb_funcionarios_fun_codigo",  "tb_funcionarios_fun_nome", "dba.tb_funcionarios" })
+If tipo = 'tb_fun_view' Then
+	lnv_pesquisa.of_buscar_pesquisa( row, ab_clicked, dw_venda, ids_funcionario, { "tb_funcionarios_fun_codigo",  "tb_funcionarios_fun_nome", "dba.tb_fun_view" })
 	dw_venda.AcceptText()
 Elseif tipo = 'produto' Then
 	lnv_pesquisa.of_buscar_pesquisa( row, ab_clicked, dw_item , ids_produto , { "tb_itens_tb_produto_pro_codigo",  "tb_produto_pro_descricao", "dba.tb_produto" })	
@@ -402,7 +402,7 @@ end event
 event doubleclicked;call super::doubleclicked;If this.RowCount() <= 0 Then Return
 If uf_null(this.GetItemNumber(1, 'ven_codigo'), 0) <= 0 Then Return
 If dwo.name = 'tb_funcionarios_fun_codigo' Then
-	Post of_busca_tabela( row, true, 'funcionarios' )
+	Post of_busca_tabela( row, true, 'tb_fun_view' )
 End If
 end event
 

@@ -43,10 +43,7 @@ public function integer of_update ();long ll_retorno
 
 try 
 	ll_retorno = this.update(True, False)
-	
-	If ll_retorno = 1 Then
-		this.ResetUpdate()
-	End If
+
 catch (DWRuntimeError e)
 	Msg(e.Text)
 	ll_retorno = -1

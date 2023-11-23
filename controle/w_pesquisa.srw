@@ -15,7 +15,6 @@ string title = "Pesquisa"
 string menuname = ""
 boolean minbox = false
 boolean maxbox = false
-boolean resizable = false
 windowtype windowtype = response!
 dw_pesquisa dw_pesquisa
 dw_filtro dw_filtro
@@ -35,6 +34,8 @@ public function boolean of_gerar_sql (string as_tabela);String ls_sql
 Choose Case as_tabela
 	Case	 'dba.tb_fornecedor'
 		ls_sql = "select for_codigo as codigo, for_descricao as descricao from dba.tb_fornecedor"
+	Case 'dba.tb_fun_view'
+		ls_sql = "select fun_codigo as codigo, fun_nome as descricao from dba.tb_fun_view"
 	Case 'dba.tb_produto'
 		ls_sql = "select pro_codigo as codigo, pro_descricao as descricao from dba.tb_produto"
 	Case 'dba.tb_funcionarios'

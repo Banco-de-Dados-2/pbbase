@@ -21,6 +21,7 @@ For ll_for = 1 To UpperBound(pwo)
 		lds_update = pwo[ll_for]
 		If lds_update.of_Update( ) <> 1 Then
 			RollBack Using SQLCA;
+			lds_update.settransobject( SQLCA)
 			Return -1
 		End If
 	Elseif pwo[ll_For].TypeOf() = datawindow! Then
@@ -28,6 +29,7 @@ For ll_for = 1 To UpperBound(pwo)
 		ldw_update = pwo[ll_for]
 		If ldw_update.of_Update( ) <> 1 Then
 			RollBack Using SQLCA;
+			ldw_update.settransobject( SQLCA)
 			Return -1
 		End If	
 	End If
@@ -37,6 +39,15 @@ If SQLCA.sqlcode = -1 Then
 	Return -1
 Else
 	Commit Using SQLCA;
+	For ll_for = 1 To UpperBound(pwo)
+		If pwo[ll_For].TypeOf( ) = datastore! Then
+			lds_update = pwo[ll_for]
+			lds_update.ResetUpdate()
+		Elseif pwo[ll_For].TypeOf() = datawindow! Then
+			ldw_update = pwo[ll_for]
+			ldw_update.ResetUpdate()
+		End If
+	Next
 	Return 1
 End If
 end function
