@@ -23,15 +23,28 @@ m_gravar m_gravar
 m_limpar m_limpar
 m_voltar m_voltar
 end type
+type m_janela from menu within m_edit
+end type
+type m_janelas from menu within m_janela
+end type
+type m_janela from menu within m_edit
+m_janelas m_janelas
+end type
+type m_ajuda from menu within m_edit
+end type
 global type m_edit from menu
 m_arquivo m_arquivo
 m_editar m_editar
+m_janela m_janela
+m_ajuda m_ajuda
 end type
 end forward
 
 global type m_edit from menu
 m_arquivo m_arquivo
 m_editar m_editar
+m_janela m_janela
+m_ajuda m_ajuda
 end type
 global m_edit m_edit
 
@@ -89,14 +102,20 @@ this.toolbargradient = true
 this.bitmapgradient = true
 this.m_arquivo=create m_arquivo
 this.m_editar=create m_editar
+this.m_janela=create m_janela
+this.m_ajuda=create m_ajuda
 this.Item[UpperBound(this.Item)+1]=this.m_arquivo
 this.Item[UpperBound(this.Item)+1]=this.m_editar
+this.Item[UpperBound(this.Item)+1]=this.m_janela
+this.Item[UpperBound(this.Item)+1]=this.m_ajuda
 end on
 
 on m_edit.destroy
 call super::destroy
 destroy(this.m_arquivo)
 destroy(this.m_editar)
+destroy(this.m_janela)
+destroy(this.m_ajuda)
 end on
 
 type m_arquivo from menu within m_edit
@@ -387,5 +406,98 @@ If IsValid(lw_ativa) Then
 	lw_ativa.ib_fechando = True 
 	Post Close(lw_ativa)
 End If
+end event
+
+type m_janela from menu within m_edit
+m_janelas m_janelas
+end type
+
+on m_janela.create
+call super::create
+this.text = "&Janela"
+this.menuitemtype = menuitemtypeabout!
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_janelas=create m_janelas
+this.Item[UpperBound(this.Item)+1]=this.m_janelas
+end on
+
+on m_janela.destroy
+call super::destroy
+destroy(this.m_janelas)
+end on
+
+type m_janelas from menu within m_janela
+end type
+
+on m_janelas.create
+call super::create
+this.visible = false
+this.text = "Janelas"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_janelas.destroy
+call super::destroy
+end on
+
+type m_ajuda from menu within m_edit
+end type
+
+on m_ajuda.create
+call super::create
+this.text = "&Sobre o Sistema"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ajuda.destroy
+call super::destroy
+end on
+
+event clicked;Msg("Projeto de Banco de Dados 2")
 end event
 
