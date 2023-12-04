@@ -4,6 +4,11 @@ global type m_edit from menu
 end type
 type m_arquivo from menu within m_edit
 end type
+type m_backup from menu within m_arquivo
+end type
+type m_arquivo from menu within m_edit
+m_backup m_backup
+end type
 type m_editar from menu within m_edit
 end type
 type m_incluir from menu within m_editar
@@ -118,7 +123,18 @@ destroy(this.m_janela)
 destroy(this.m_ajuda)
 end on
 
+event clicked;nv_backup lnv_backup
+lnv_backup = Create nv_backup
+
+lnv_backup.of_run()
+
+Msg("O backup foi realizado")
+
+Destroy(lnv_backup)
+end event
+
 type m_arquivo from menu within m_edit
+m_backup m_backup
 end type
 
 on m_arquivo.create
@@ -140,9 +156,40 @@ this.toolbarbackcolor = 67108864
 this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
+this.m_backup=create m_backup
+this.Item[UpperBound(this.Item)+1]=this.m_backup
 end on
 
 on m_arquivo.destroy
+call super::destroy
+destroy(this.m_backup)
+end on
+
+type m_backup from menu within m_arquivo
+end type
+
+on m_backup.create
+call super::create
+this.text = "Realizar backup"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_backup.destroy
 call super::destroy
 end on
 
