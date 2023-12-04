@@ -1,0 +1,10 @@
+HA$PBExportHeader$s_parm.srs
+global type s_parm from structure
+	string		string[]
+	Powerobject		pwo[]
+	boolean		boolean[]
+	date		data[]
+	decimal		dec[]
+	long		long[]
+end type
+
