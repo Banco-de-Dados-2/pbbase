@@ -182,10 +182,15 @@ CREATE GROUP LOGIN;
 GRANT USAGE ON SCHEMA DBA TO LOGIN;
 GRANT SELECT ON TABLE DBA.TB_FUNCIONARIOS TO LOGIN;
 CREATE USER LOGI WITH NOCREATEDB NOCREATEROLE LOGIN PASSWORD 'jw8s0F4';
+GRANT LOGIN TO LOGI;
 CREATE GROUP DIRETOR;
 GRANT USAGE ON SCHEMA DBA TO DIRETOR;
 GRANT pg_read_all_data TO DIRETOR;
 GRANT pg_write_all_data TO DIRETOR;
+CREATE GROUP ENCRYPTUSER;
+GRANT USAGE ON SCHEMA PUBLIC TO encryptuser;
+GRANT SELECT ON TABLE PUBLIC.DUMMY TO encryptuser;
+GRANT EXECUTE ON FUNCTION public.crypt(text, text), public.gen_salt(text) TO ENCRYPTUSER;
 GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA DBA TO DIRETOR;
 GRANT EXECUTE ON FUNCTION DBA.NEXT_VAL(IN AS_SEQUENCE VARCHAR(50) ) TO DIRETOR;
 GRANT EXECUTE ON FUNCTION DBA.CREATE_USERDB( IN v_username NAME, IN v_password TEXT) TO DIRETOR;
@@ -210,6 +215,8 @@ CREATE GROUP ESTOQUISTA;
 GRANT USAGE ON SCHEMA DBA TO ESTOQUISTA;
 GRANT SELECT, UPDATE, DELETE, INSERT ON dba.tb_fornecedor, dba.tb_produto TO ESTOQUISTA;
 GRANT USAGE, SELECT, UPDATE ON DBA.FOR_CODIGO, DBA.PRO_CODIGO TO ESTOQUISTA;
+GRANT ENCRYPTUSER TO LOGIN, GERENTE, DIRETOR;
+
 /**/
 
 CREATE OR REPLACE FUNCTION of_processar_saldo() RETURNS trigger AS $of_processar_saldo$
@@ -260,9 +267,26 @@ CREATE OR REPLACE TRIGGER PROCESSAR_SALDO BEFORE UPDATE OR INSERT OR DELETE
     ON DBA.tb_itens FOR EACH ROW
 EXECUTE FUNCTION  of_processar_saldo();
 
+create extension pgcrypto;
 
-select pwhash, crypt('mypassword', pwhash) as auth, gen
-from (select crypt('mypassword', gen_salt('md5')), gen_salt('md5') as gen) as t1(pwhash);
+select
+    crypt('mypassword', pwhash) as ret
+from
+    (select
+         crypt('mypassword', gen_salt('md5')) as pwhash,
+         gen_salt('md5') as gen
+     ) as t1(pwhash, gen);
+
+select gen_salt from gen_salt('md5');
+
+select Case When
+    crypt( '1', '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1') = '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1'
+    Then 'T' else 'F' End
+    as ret from public.dummy ;
+
+select Case When crypt( '1', '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1') = '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1' Then 'T' else 'F' End as ret from public.dummy ;
+
+select * from dba.tb_funcionarios;
 
 -- Indices
 
