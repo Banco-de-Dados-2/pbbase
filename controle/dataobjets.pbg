@@ -11,6 +11,7 @@ Save Format v3.0(19990112)
  "d_filtro_funcionario.srd" "dataobjets.pbl";
  "d_filtro_pesquisa.srd" "dataobjets.pbl";
  "d_emitir_venda.srd" "dataobjets.pbl";
+ "d_filtro_venda.srd" "dataobjets.pbl";
  "d_filtro_produto.srd" "dataobjets.pbl";
  "d_constraint.srd" "dataobjets.pbl";
  "d_cad_produto.srd" "dataobjets.pbl";

@@ -1,0 +1,54 @@
+HA$PBExportHeader$d_pesquisa_venda.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no grid.lines=0 )
+header(height=144 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=ven_codigo dbname="ven_codigo" )
+ column=(type=datetime updatewhereclause=yes name=ven_horario dbname="ven_horario" )
+ column=(type=decimal(2) updatewhereclause=yes name=ven_valor_total dbname="ven_valor_total" )
+ column=(type=decimal(0) updatewhereclause=yes name=fun_codigo dbname="fun_codigo" )
+ column=(type=char(45) updatewhereclause=yes name=fun_nome dbname="fun_nome" )
+ retrieve="  SELECT
+         dba.tb_vendas.ven_codigo as ven_codigo,
+         dba.tb_vendas.ven_horario as ven_horario,
+         dba.tb_vendas.ven_valor_total as ven_valor_total,
+         dba.tb_funcionarios.fun_codigo as fun_codigo,
+         dba.tb_funcionarios.fun_nome as fun_nome
+    FROM
+        dba.tb_vendas
+        join dba.tb_funcionarios on
+            tb_vendas.tb_funcionarios_fun_codigo = tb_funcionarios.fun_codigo
+        join(
+            select distinct
+                it.tb_vendas_ven_codigo as item_venda
+            from
+                dba.tb_itens as it
+            where
+                5=5
+        ) as it on
+            it.item_venda = dba.tb_vendas.ven_codigo
+where
+    1=1"  sort="ven_horario A ven_codigo A " )
+column(band=detail id=3 alignment="1" tabsequence=0 border="0" color="33554432" x="1093" y="0" height="64" width="663" html.valueishtml="0"  name=ven_valor_total visible="1" editmask.mask="###,###.00" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=0 border="0" color="33554432" x="2299" y="0" height="64" width="1207" html.valueishtml="0"  name=fun_nome visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="C$$HEX1$$f300$$ENDHEX$$digo" border="0" color="33554432" x="5" y="4" height="64" width="311" html.valueishtml="0"  name=ven_codigo_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Data" border="0" color="33554432" x="325" y="4" height="64" width="754" html.valueishtml="0"  name=ven_horario_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Valor Total" border="0" color="33554432" x="1088" y="4" height="64" width="667" html.valueishtml="0"  name=ven_valor_total_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="C$$HEX1$$f300$$ENDHEX$$d. Funcion$$HEX1$$e100$$ENDHEX$$rio" border="0" color="33554432" x="1765" y="4" height="64" width="521" html.valueishtml="0"  name=fun_codigo_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Nome Funcion$$HEX1$$e100$$ENDHEX$$rio" border="0" color="33554432" x="2295" y="4" height="64" width="1211" html.valueishtml="0"  name=fun_nome_t visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=0 border="0" color="33554432" x="1769" y="0" height="64" width="517" html.valueishtml="0"  name=fun_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=0 border="0" color="33554432" x="329" y="0" height="64" width="750" html.valueishtml="0"  name=ven_horario visible="1" editmask.mask="dd/mm/yyyy hh:mm" editmask.focusrectangle=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=0 border="0" color="33554432" x="9" y="0" height="64" width="306" html.valueishtml="0"  name=ven_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

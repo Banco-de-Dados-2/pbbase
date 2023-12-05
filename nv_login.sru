@@ -5,6 +5,7 @@ end type
 end forward
 
 global type nv_login from nv_ancobject
+event type boolean of_validar_senha ( string as_senha,  string as_senhacrypt )
 end type
 global nv_login nv_login
 
@@ -21,6 +22,7 @@ public function nv_datastore of_create_lds_login ()
 public subroutine of_set_login (string as_login, string as_senha)
 public subroutine of_set_transaction ()
 public function Boolean of_logardev ()
+public function Boolean of_validar_senha (string as_senha, string as_senhacrypt)
 end prototypes
 
 public function boolean of_validar_login ();If is_login = '' Then Return False
@@ -38,7 +40,8 @@ lds_login = of_create_lds_login()
 
 If lds_login.RowCount() <= 0 Then Return False
 
-If lds_login.GetItemString( 1, 'fun_senha') = is_senha Then 
+
+If of_Validar_Senha( is_senha, lds_login.GetItemString( 1, 'fun_senha') ) Then 
 	Choose Case lds_login.GetItemString( 1, 'fun_funcao')
 		case DIRETOR
 			is_role = 'd'
@@ -56,10 +59,12 @@ Destroy(lds_login)
 end function
 
 public function nv_datastore of_create_lds_login ();nv_dataStore lds_login
+String ls_sql
+
+ls_sql = "SELECT fun_cpf, fun_senha, fun_funcao FROM DBA.TB_FUNCIONARIOS WHERE fun_cpf = '" + is_login + "'"
 
 lds_login = CREATE nv_dataStore
-lds_login.of_create_from_sql( &
-"SELECT fun_cpf, fun_senha, fun_funcao FROM DBA.TB_FUNCIONARIOS WHERE fun_cpf = '" + is_login + "'", True )
+lds_login.of_create_from_sql( ls_sql , True )
 
 return lds_login
 end function
@@ -93,6 +98,14 @@ If SQLCA.SQLCode = -1 Then
 Else
 	Return True
 End If
+
+end function
+
+public function Boolean of_validar_senha (string as_senha, string as_senhacrypt);nv_Encrypt ln_Encrypt
+
+ln_Encrypt = Create nv_Encrypt 
+
+return ln_Encrypt.of_ValidarPW( as_senha , as_senhaCrypt )
 
 end function
 

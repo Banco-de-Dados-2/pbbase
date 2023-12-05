@@ -1,0 +1,19 @@
+HA$PBExportHeader$uf_strtrans.srf
+global type uf_strtrans from function_object
+end type
+
+forward prototypes
+global function string uf_strtrans (string as_main, string as_out, string as_in)
+end prototypes
+
+global function string uf_strtrans (string as_main, string as_out, string as_in);String Retorno
+long posA, lenA
+
+posA = Pos(as_Main, as_Out)
+lenA = Len(as_Out)
+
+Retorno = Replace( as_Main, posA, LenA, as_In)
+
+Return Retorno
+end function
+

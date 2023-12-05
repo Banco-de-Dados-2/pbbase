@@ -4,11 +4,16 @@ global type w_venda from w_ancestor
 end type
 type tab_vendas from tab within w_venda
 end type
+type tabpage_pesquisa from uo_pesquisa_venda within tab_vendas
+end type
+type tabpage_pesquisa from uo_pesquisa_venda within tab_vendas
+end type
 type tabpage_emitir from uo_emitir_venda within tab_vendas
 end type
 type tabpage_emitir from uo_emitir_venda within tab_vendas
 end type
 type tab_vendas from tab within w_venda
+tabpage_pesquisa tabpage_pesquisa
 tabpage_emitir tabpage_emitir
 end type
 end forward
@@ -106,17 +111,29 @@ boolean raggedright = true
 boolean focusonbuttondown = true
 boolean boldselectedtext = true
 integer selectedtab = 1
+tabpage_pesquisa tabpage_pesquisa
 tabpage_emitir tabpage_emitir
 end type
 
 on tab_vendas.create
+this.tabpage_pesquisa=create tabpage_pesquisa
 this.tabpage_emitir=create tabpage_emitir
-this.Control[]={this.tabpage_emitir}
+this.Control[]={this.tabpage_pesquisa,&
+this.tabpage_emitir}
 end on
 
 on tab_vendas.destroy
+destroy(this.tabpage_pesquisa)
 destroy(this.tabpage_emitir)
 end on
+
+type tabpage_pesquisa from uo_pesquisa_venda within tab_vendas
+integer x = 18
+integer y = 112
+integer width = 4343
+integer height = 2288
+string text = "Pesquisa"
+end type
 
 type tabpage_emitir from uo_emitir_venda within tab_vendas
 integer x = 18

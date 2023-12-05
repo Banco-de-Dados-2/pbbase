@@ -5,6 +5,8 @@ Save Format v3.0(19990112)
 @begin Objects
  "msg.srf" "utils.pbl";
  "s_parm.srs" "utils.pbl";
+ "nv_encrypt.sru" "utils.pbl";
+ "uf_strtrans.srf" "utils.pbl";
  "uf_strtran.srf" "utils.pbl";
  "uf_null.srf" "utils.pbl";
 @end;

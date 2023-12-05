@@ -123,16 +123,6 @@ destroy(this.m_janela)
 destroy(this.m_ajuda)
 end on
 
-event clicked;nv_backup lnv_backup
-lnv_backup = Create nv_backup
-
-lnv_backup.of_run()
-
-Msg("O backup foi realizado")
-
-Destroy(lnv_backup)
-end event
-
 type m_arquivo from menu within m_edit
 m_backup m_backup
 end type
@@ -192,6 +182,16 @@ end on
 on m_backup.destroy
 call super::destroy
 end on
+
+event clicked;nv_backup lnv_backup
+lnv_backup = Create nv_backup
+
+lnv_backup.of_run()
+
+Msg("O backup foi realizado")
+
+Destroy(lnv_backup)
+end event
 
 type m_editar from menu within m_edit
 m_incluir m_incluir
