@@ -4,6 +4,7 @@ Save Format v3.0(19990112)
 @end;
 @begin Objects
  "d_emitir_venda_item.srd" "dataobjets.pbl";
+ "d_pesquisa_venda.srd" "dataobjets.pbl";
  "d_cad_fornecedor.srd" "dataobjets.pbl";
  "d_cad_funcionario.srd" "dataobjets.pbl";
  "d_pesquisa_funcionario.srd" "dataobjets.pbl";
@@ -18,4 +19,5 @@ Save Format v3.0(19990112)
  "d_info_prod.srd" "dataobjets.pbl";
  "d_pesquisa.srd" "dataobjets.pbl";
  "d_contador.srd" "dataobjets.pbl";
+ "d_pesquisa_venda_produto.srd" "dataobjets.pbl";
 @end;
