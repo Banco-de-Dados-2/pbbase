@@ -8,7 +8,6 @@ Save Format v3.0(19990112)
  "uo_emitir_venda.sru" "visualobjects.pbl";
  "uo_cad_funcionario.sru" "visualobjects.pbl";
  "uo_cad_produto.sru" "visualobjects.pbl";
- "uo_venda.sru" "visualobjects.pbl";
  "uo_pesquisa_funcionario.sru" "visualobjects.pbl";
  "uo_home.sru" "visualobjects.pbl";
 @end;
