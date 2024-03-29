@@ -16,6 +16,7 @@ forward prototypes
 public function integer of_create_from_sql (string as_sql, boolean ab_retrieve)
 public function integer of_update ()
 public function Boolean of_lock_table (string as_col, long al_pk)
+public function Integer of_create_group (string as_campo, integer ai_hierarquia)
 end prototypes
 
 public function integer of_create_from_sql (string as_sql, boolean ab_retrieve);String ERRORS, ls_Syntax
@@ -70,6 +71,31 @@ End If
 
 
 	
+end function
+
+public function Integer of_create_group (string as_campo, integer ai_hierarquia);Long ll_pos = 0, ll_count = 1, ll_hierarquia
+String ls_group, ls_syntax
+
+ls_syntax = This.Object.DataWindow.Syntax
+
+If ai_hierarquia = 0 Then
+	Do 
+		ll_pos = Pos( ls_syntax, 'group(level=', ll_pos)
+		If ll_pos = 0 Then
+			ll_hierarquia = ll_count
+		Else
+			ll_count++
+		End If
+	Loop While ll_pos > 0
+Else
+	ll_pos = Pos( ls_syntax, 'group(level='+String(ai_hierarquia), ll_pos)
+	
+End If
+
+ls_group = 'group(level='+String(ll_hierarquia)+' header.height=0 trailer.height=0 by=("' + as_campo +'" ) header.color="536870912" trailer.color="536870912" )'
+
+Return 1 
+
 end function
 
 on nv_datastore.create

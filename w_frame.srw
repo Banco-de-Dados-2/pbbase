@@ -7,15 +7,14 @@ end type
 end forward
 
 global type w_frame from w_ancestor
-integer width = 4475
-integer height = 1496
+integer width = 5303
+integer height = 2144
 boolean titlebar = false
 string title = ""
 string menuname = ""
 boolean controlmenu = false
 boolean minbox = false
 boolean maxbox = false
-boolean resizable = false
 boolean border = false
 windowtype windowtype = popup!
 windowstate windowstate = maximized!
@@ -47,10 +46,8 @@ Return 1
 end event
 
 type uo_hom from uo_home within w_frame
-integer x = 50
-integer y = 136
-integer width = 4402
-integer height = 1052
+integer width = 4910
+integer height = 1980
 integer taborder = 20
 end type
 

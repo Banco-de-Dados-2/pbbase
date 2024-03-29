@@ -88,6 +88,10 @@ destroy(this.sle_usuario)
 end on
 
 event open;call super::open;inv_login = CREATE nv_login
+
+This.SetFocus( )
+
+sle_usuario.SetFocus( )
 end event
 
 event close;call super::close;Destroy(inv_login)
