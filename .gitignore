@@ -3,6 +3,8 @@
 *.pbw
 *.opt
 *.*.opt
+*.pbd
+*.exe
 *.pbc
 *.htm
 *.html

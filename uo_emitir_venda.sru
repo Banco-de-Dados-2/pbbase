@@ -409,7 +409,7 @@ end event
 event itemchanged;call super::itemchanged;If this.RowCount() <= 0 Then Return
 If uf_null(this.GetItemNumber(1, 'ven_codigo'), 0) <= 0 Then Return
 If dwo.name = 'tb_funcionarios_fun_codigo' Then
-	Post of_busca_tabela( row, False, 'funcionarios')
+	Post of_busca_tabela( row, False, 'tb_fun_view')
 End If
 end event
 
