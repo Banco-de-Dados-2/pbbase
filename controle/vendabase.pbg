@@ -1,8 +1,0 @@
-Save Format v3.0(19990112)
-@begin Libraries
- "vendabase.pbl" "";
-@end;
-@begin Objects
- "w_login.srw" "vendabase.pbl";
- "vendabase.sra" "vendabase.pbl";
-@end;
