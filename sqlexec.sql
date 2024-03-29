@@ -43,17 +43,13 @@ CREATE TABLE PUBLIC.DUMMY(
 INSERT INTO PUBLIC.DUMMY VALUES (1);
 SELECT * FROM PUBLIC.DUMMY;
 
-CREATE VIEW dba.tb_fun_view as SELECT fun_codigo, fun_nome FROM DBA.tb_funcionarios WHERE UPPER(fun_funcao) = 'VENDEDOR';
+CREATE OR REPLACE VIEW dba.tb_fun_view as SELECT fun_codigo, fun_nome FROM DBA.tb_funcionarios;
 
 CREATE SEQUENCE DBA.FUN_CODIGO;
 CREATE SEQUENCE DBA.FOR_CODIGO;
 CREATE SEQUENCE DBA.PRO_CODIGO;
 CREATE SEQUENCE DBA.VEN_CODIGO;
 CREATE SEQUENCE DBA.ITE_CODIGO;
-
-SELECT nextval('DBA.ITE_CODIGO');
-
-SELECT nextval('fun_codigo') AS NEXT FROM PUBLIC.DUMMY;
 
 CREATE OR REPLACE FUNCTION DBA.NEXT_VAL( AS_SEQUENCE VARCHAR(50) )
 RETURNS BIGINT
@@ -274,24 +270,6 @@ EXECUTE FUNCTION  of_processar_saldo();
 
 create extension pgcrypto;
 
-select
-    crypt('mypassword', pwhash) as ret
-from
-    (select
-         crypt('mypassword', gen_salt('md5')) as pwhash,
-         gen_salt('md5') as gen
-     ) as t1(pwhash, gen);
-
-select gen_salt from gen_salt('md5');
-
-select Case When
-    crypt( '1', '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1') = '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1'
-    Then 'T' else 'F' End
-    as ret from public.dummy ;
-
-select Case When crypt( '1', '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1') = '$1$/RSZIuol$yZtQsFFjFm1wuFFhGw3Lj1' Then 'T' else 'F' End as ret from public.dummy ;
-
-select * from dba.tb_funcionarios;
 
 -- Indices
 

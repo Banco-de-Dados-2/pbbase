@@ -2,6 +2,7 @@
 *.prp
 *.pbw
 *.opt
+*.*.opt
 *.pbc
 *.htm
 *.html
